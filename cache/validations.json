@@ -44,6 +44,50 @@
         },
         "solcVersion": "0.8.9"
       }
+    },
+    {
+      "contracts/MVP.sol:MVP": {
+        "src": "contracts/MVP.sol:6",
+        "version": {
+          "withMetadata": "8eb0c440b24075b28a15d54805a1cf947cfd2b78d21a29456b75a4d01a315b61",
+          "withoutMetadata": "22acb051cf2ec3eb8a4cb27f2cb3fc831c90aea636b735df5cfd2ddf93170a12",
+          "linkedWithoutMetadata": "22acb051cf2ec3eb8a4cb27f2cb3fc831c90aea636b735df5cfd2ddf93170a12"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "greeting()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.9"
+      },
+      "hardhat/console.sol:console": {
+        "src": "hardhat/console.sol:4",
+        "version": {
+          "withMetadata": "c06095340e2e199a7ef7657000f049a018c4fdb55f889d4d8bccb195bbd3d547",
+          "withoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff",
+          "linkedWithoutMetadata": "08d24783a787f8a51dea0c166bb6f91a4f0865e02d03d749f102d332e6ead0ff"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.9"
+      }
     }
   ]
 }
