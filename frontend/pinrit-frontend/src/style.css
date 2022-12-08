@@ -2,6 +2,8 @@ body {
     background-color: #0B0D21;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
+    padding: none;
+    margin: none;
 }
 
 button{
@@ -70,4 +72,19 @@ button{
 #test_text {
     text-align: left;
     padding-left: 2em;
+}
+
+.footer {
+    background-color: #080620 !important;
+    height: 20em;
+    padding: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cl {
+    color: white;
 }
