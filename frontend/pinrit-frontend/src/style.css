@@ -1,0 +1,73 @@
+body {
+    background-color: #0B0D21;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+}
+
+button{
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+     transition: transform .7s ease-in-out;
+    margin-left:10px;
+
+  }
+  button:hover{
+    transform: rotate(360deg);
+
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  .title-canvas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: auto;
+    
+  }
+
+.metamask-button {
+    height: 7em;
+}
+
+.metamask-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.help {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: 2em;
+    
+}
+
+.address {
+    color: gainsboro;
+    font-size: x-small;
+}
+
+.canvas-container {
+    display: flex;
+    flex-direction: row;
+    padding: 2em;
+}
+
+#test_text {
+    text-align: left;
+    padding-left: 2em;
+}
