@@ -1,20 +1,7 @@
-let contractAddress = "0x4d40D54C7773388Da9F301A9ed6bB796Cada15CF";
-let abi =  [
-    {
-      "inputs": [],
-      "name": "greeting",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    }
-  ]
 
+import myJson from '../../../../Marketplace.json' assert {type: 'json'};
+
+let contract ="0xE5E559cd3C67d02840257518e81A16324C07415A"
 
 //loading web3
 async function loadWeb3() {
@@ -26,7 +13,7 @@ async function loadWeb3() {
   
   //loading contract
   async function loadContract() {
-    return (contract = await new window.web3.eth.Contract(abi, contractAddress));
+    return (contract = await new window.web3.eth.Contract(myJson.abi, myJson.address));
   }
 
 
@@ -76,17 +63,18 @@ async function printAccount() {
 }
 
 
-// printing test data
-async function printingText() {
-    window.contract.methods
-      .greeting()
-      .call()
-      .then(function (string) {
-        const elementTest = document.getElementById("test_text");
-        elementTest.innerHTML = string;
-        console.log(string);
-      });
-  }
+// // printing test data
+// async function mint() {
+//     window.contract.methods
+//       .mintNFT()
+//       .call()
+//       .then(function (uint) {
+//         const elementTest = document.getElementById("test_text");
+//         elementTest.innerHTML = string;
+//         console.log(string);
+//       });
+//   }
+
 
 
 async function load() {
@@ -95,7 +83,6 @@ async function load() {
     await loadWeb3();
     window.contract = await loadContract();
     await getAllAccounts();
-    await printingText();
 }
 
 load();

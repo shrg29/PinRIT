@@ -1,7 +1,7 @@
 body {
     background-color: #0B0D21;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
+    color: white !important;
     padding: none;
     margin: none;
 }
@@ -19,6 +19,15 @@ button{
     transform: rotate(360deg);
 
   }
+
+  .cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
 
   .title {
     display: flex;
@@ -67,6 +76,7 @@ button{
     display: flex;
     flex-direction: row;
     padding: 2em;
+    justify-content: space-evenly
 }
 
 #test_text {
@@ -88,3 +98,133 @@ button{
 .cl {
     color: white;
 }
+
+.card-panel {
+    width: 40em;
+    height: 35em;
+    background-color: #171B42;
+    border-style: solid;
+    border-color: teal;
+    border-radius: 5%;
+}
+
+.card {
+    border-style: solid;
+    background-color: #070916;
+    border-color: #5FA5FA;
+    border-radius: 5%;
+    width: 30em;
+    height: 30em;
+
+}
+
+
+.input-field {
+  border-style: solid;
+  border-radius: 1em;
+  background-color: #111535;
+  border-color: #04B6D4;
+}
+
+.btn {
+  border-style: solid;
+  border-radius: 1em;
+  background-color: #111535;
+  border-color: #04B6D4;
+  color: white;
+}
+
+.btn:hover {
+background-color: #575FA8;
+}
+
+/* ovdje pocinje copy */
+  
+  .header {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    
+  }
+  
+  .header h2 {
+    min-width: fit-content;
+  }
+  
+  .server-message {
+    width: 100%;
+    padding: 16px;
+    border-radius: 5px;
+  }
+  
+  .input-div {
+    width: 70%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    color: white;
+
+  }
+  
+  .input-div .browse {
+    color: white;
+    font-weight: bold;
+  }
+  
+
+  .saved-div,
+  .queued-div {
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: relative;
+    border-radius: 5px;
+    border: 1px dotted black;
+  }
+  
+  .saved-div .image,
+  .queued-div .image {
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .saved-div .image:nth-child(4n),
+  .queued-div .image:nth-child(4n) {
+    margin-right: 0;
+  }
+  
+  .saved-div .image img,
+  .queued-div .image img {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .saved-div .image span,
+  .queued-div .image span {
+    position: absolute;
+    top: -4px;
+    right: 4px;
+    cursor: pointer;
+    font-size: 22px;
+    color: white;
+  }
+  
+  .saved-div .image span:hover,
+  .queued-div .image span:hover {
+    opacity: 0.8;
+  }
+  
+  .saved-div .span--hidden,
+  .queued-div .span--hidden {
+    visibility: hidden;
+  }
