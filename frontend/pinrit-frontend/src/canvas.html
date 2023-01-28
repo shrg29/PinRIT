@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="scripts/web3_services.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
 
 </head>
@@ -79,8 +81,8 @@
 
 
               <div class="row">
-                <div class="col s12 " >
-                  <button onclick="uploadMetadataToIPFS()">
+                <div class="col s12 ">
+                  <button id="buttonUpload">
                     <a class="waves-effect waves-light btn">Upload artwork</a>
                   </button>
                 </div>
@@ -157,11 +159,74 @@
 
   </script>
 
+<script>
+  const element = document.getElementById("buttonUpload");
+  element.addEventListener("click", uploadMetadataToIPFS());
+
+  // const axios = require('axios');
+
+  async function uploadMetadataToIPFS() {
+    let name = document.getElementById("name");
+    let description = document.getElementById("description");
+    let price = document.getElementById("price");
+    let fileURL = document.getElementById("fileURL");
+    //Make sure that none of the fields are empty
+    if( !name || !description || !price || !fileURL)
+        return;
+
+    const nftJSON = {
+        name, description, price, image: fileURL
+    }
+
+    try {
+        //upload the metadata JSON to IPFS
+        const response = await uploadJSONToIPFS(nftJSON);
+        if(response.success === true){
+            console.log("Uploaded JSON to Pinata: ", response)
+            return response.pinataURL;
+        }
+    }
+    catch(e) {
+        console.log("error uploading JSON metadata:", e)
+    }
+}
+
+
+async function uploadJSONToIPFS(JSONBody) {
+
+    const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
+    //making axios POST request to Pinata ⬇️
+    return axios.post(url, JSONBody, {
+            headers: {
+                pinata_api_key: "697b58916befdfdf20bb",
+                pinata_secret_api_key: "a94852cfef4ce49665f7eeae6574311e920141117e664381fac1ffbe2b627a70",
+            }
+        })
+        .then(function (response) {
+           return {
+               success: true,
+               pinataURL: "https://gateway.pinata.cloud/ipfs/" + response.data.IpfsHash
+           };
+        })
+        .catch(function (error) {
+            console.log(error)
+            return {
+                success: false,
+                message: error.message,
+            }
+
+    });
+};
+
+
+</script>
+  
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  
 
 </body>
 

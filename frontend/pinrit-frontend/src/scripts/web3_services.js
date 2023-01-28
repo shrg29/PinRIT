@@ -22,7 +22,8 @@ async function loadWeb3() {
   }
 
 
-async function connectMetamask() {
+export async function connectMetamask() {
+    console.log("konektiran sam ")
     // Modern dapp browsers...
     if (window.ethereum) {
         window.web3 = new Web3(ethereum);
@@ -89,29 +90,7 @@ async function OnChangeFile(e) {
     }
 }
 
-async function uploadMetadataToIPFS() {
-    console.log("sven nema pisu")
-    const {name, description, price} = formParams;
-    //Make sure that none of the fields are empty
-    if( !name || !description || !price || !fileURL)
-        return;
 
-    const nftJSON = {
-        name, description, price, image: fileURL
-    }
-
-    try {
-        //upload the metadata JSON to IPFS
-        const response = await uploadJSONToIPFS(nftJSON);
-        if(response.success === true){
-            console.log("Uploaded JSON to Pinata: ", response)
-            return response.pinataURL;
-        }
-    }
-    catch(e) {
-        console.log("error uploading JSON metadata:", e)
-    }
-}
 
 async function listNFT(e) {
     e.preventDefault();
