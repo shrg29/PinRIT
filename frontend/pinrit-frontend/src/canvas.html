@@ -18,8 +18,6 @@
   <script type="module" src="scripts/web3_services.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-
-
 </head>
 
 <body>
@@ -56,39 +54,35 @@
               <div class="row header">
                 <div class="input-field col s6">
                   <input id="name" type="text" class="validate">
-                  <label for="name">NFT name</label>
+                  <label for="name"></label>
                 </div>
                 <div class="input-field col s6">
                   <input id="price" type="text" class="validate">
-                  <label for="price">Price</label>
+                  <label for="price"></label>
                 </div>
               </div>
 
               <div class="row header">
                 <div class="input-field col s12">
                   <textarea id="description" class="materialize-textarea"></textarea>
-                  <label for="textarea1">Description</label>
+                  <label for="textarea1"></label>
                 </div>
               </div>
 
               <div class="row header">
                 <div class="input-div col s12">
-                  <!-- <p>Drag & drop photos here </p> -->
+                  <!-- pozovi na input onChangeFile funkciju  -->
                   <input type="file" id="fileURL" class="file" multiple="multiple"
                     accept="image/jpeg, image/png, image/jpg, image/gif" />
                 </div>
               </div>
 
-
               <div class="row">
                 <div class="col s12 ">
-                  <button id="buttonUpload">
-                    <a class="waves-effect waves-light btn">Upload artwork</a>
-                  </button>
+                  <!-- pozovi uploadArtwork funkciju -->
+                    <a class="waves-effect waves-light btn" id="buttonUpload">Upload artwork</a>
                 </div>
               </div>
-
-
               <div id="mint-message"></div>
             </div>
           </div>
@@ -155,68 +149,6 @@
       // display the uploaded images on the screen
       displayQueuedImages()
     })
-
-
-  </script>
-
-<script>
-  const element = document.getElementById("buttonUpload");
-  element.addEventListener("click", uploadMetadataToIPFS());
-
-  // const axios = require('axios');
-
-  async function uploadMetadataToIPFS() {
-    let name = document.getElementById("name");
-    let description = document.getElementById("description");
-    let price = document.getElementById("price");
-    let fileURL = document.getElementById("fileURL");
-    //Make sure that none of the fields are empty
-    if( !name || !description || !price || !fileURL)
-        return;
-
-    const nftJSON = {
-        name, description, price, image: fileURL
-    }
-
-    try {
-        //upload the metadata JSON to IPFS
-        const response = await uploadJSONToIPFS(nftJSON);
-        if(response.success === true){
-            console.log("Uploaded JSON to Pinata: ", response)
-            return response.pinataURL;
-        }
-    }
-    catch(e) {
-        console.log("error uploading JSON metadata:", e)
-    }
-}
-
-
-async function uploadJSONToIPFS(JSONBody) {
-
-    const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
-    //making axios POST request to Pinata ⬇️
-    return axios.post(url, JSONBody, {
-            headers: {
-                pinata_api_key: "697b58916befdfdf20bb",
-                pinata_secret_api_key: "a94852cfef4ce49665f7eeae6574311e920141117e664381fac1ffbe2b627a70",
-            }
-        })
-        .then(function (response) {
-           return {
-               success: true,
-               pinataURL: "https://gateway.pinata.cloud/ipfs/" + response.data.IpfsHash
-           };
-        })
-        .catch(function (error) {
-            console.log(error)
-            return {
-                success: false,
-                message: error.message,
-            }
-
-    });
-};
 
 
 </script>

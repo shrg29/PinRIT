@@ -6,20 +6,6 @@ body {
     margin: none;
 }
 
-button{
-    border: none;
-    cursor: pointer;
-    appearance: none;
-    background-color: inherit;
-     transition: transform .7s ease-in-out;
-    margin-left:10px;
-
-  }
-  button:hover{
-    transform: rotate(360deg);
-
-  }
-
   .title {
     display: flex;
     flex-direction: row;
@@ -33,8 +19,24 @@ button{
   }
 
 .metamask-button {
-    height: 7em;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+   transition: transform .7s ease-in-out;
+   margin-left:10px;
+    
 }
+
+.metamask-button:hover{
+  transform: rotate(360deg);
+
+}
+
+.mtm-height {
+  height: 7em;
+}
+
 
 .metamask-container {
     display: flex;
