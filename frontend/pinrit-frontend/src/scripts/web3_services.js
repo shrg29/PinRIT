@@ -90,6 +90,7 @@ async function OnChangeFile(e) {
 }
 
 async function uploadMetadataToIPFS() {
+    console.log("sven nema pisu")
     const {name, description, price} = formParams;
     //Make sure that none of the fields are empty
     if( !name || !description || !price || !fileURL)

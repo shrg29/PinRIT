@@ -41,10 +41,10 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.0",
-    "dotenv": "^16.0.3",
-    "materialize-css": "^1.0.0-rc.2",
     "axios": "^0.27.2",
+    "dotenv": "^16.0.3",
     "fs": "*",
+    "materialize-css": "^1.0.0-rc.2",
     "path-browserify": "^1.0.1",
     "web-vitals": "^2.1.4",
     "web3modal": "^1.9.7"

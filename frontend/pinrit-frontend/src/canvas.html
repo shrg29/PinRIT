@@ -1,165 +1,168 @@
 <!doctype html>
 <html class="no-js" lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>PinRIT</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Place favicon.ico in the root directory -->
-      <!--Import Google Icon Font-->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="style.css">
-        <script type="module" src="scripts/web3_services.js"></script>
-      
 
-    </head>
-    <body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>PinRIT</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Place favicon.ico in the root directory -->
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="scripts/web3_services.js"></script>
 
-        <div class="title-canvas">
-            <img src="assets-canvas/logo1.svg">
-            <img src="assets-canvas/title.svg">
 
-            <div class="help">
-                <h3 class="address" id="connected-account-address"></h3>
-                <img src="assets-canvas/help.png">
-               </div> 
-           </div> 
+</head>
 
-        <div class="canvas-container">
-        
+<body>
 
-        <div class="row">
-            <div class="col s12 m5 z-depth-3">
-              <div class="canvas-panel">
-                <div class="queued-div"></div>
+  <div class="title-canvas">
+    <img src="assets-canvas/logo1.svg">
+    <img src="assets-canvas/title.svg">
+
+    <div class="help">
+      <h3 class="address" id="connected-account-address"></h3>
+      <img src="assets-canvas/help.png">
+    </div>
+  </div>
+
+  <div class="canvas-container">
+
+
+    <div class="row">
+      <div class="col s12 m5 z-depth-3">
+        <div class="canvas-panel">
+          <div class="queued-div"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content white-text">
+            <div class="cont">
+              <span class="card-title">Pin something to PinRIT</span>
+
+              <div class="row header">
+                <div class="input-field col s6">
+                  <input id="name" type="text" class="validate">
+                  <label for="name">NFT name</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="price" type="text" class="validate">
+                  <label for="price">Price</label>
+                </div>
               </div>
-            </div>
 
+              <div class="row header">
+                <div class="input-field col s12">
+                  <textarea id="description" class="materialize-textarea"></textarea>
+                  <label for="textarea1">Description</label>
+                </div>
+              </div>
+
+              <div class="row header">
+                <div class="input-div col s12">
+                  <!-- <p>Drag & drop photos here </p> -->
+                  <input type="file" id="fileURL" class="file" multiple="multiple"
+                    accept="image/jpeg, image/png, image/jpg, image/gif" />
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col s12 " >
+                  <button onclick="uploadMetadataToIPFS()">
+                    <a class="waves-effect waves-light btn">Upload artwork</a>
+                  </button>
+                </div>
+              </div>
+
+
+              <div id="mint-message"></div>
+            </div>
           </div>
-
-         
-
-            <div class="row">
-                <div class="col s12">
-                  <div class="card">
-                    <div class="card-content white-text">
-                      <div class="cont">
-                        <span class="card-title">Pin something to PinRIT</span>
-
-                      <div class="row header">
-                          <div class="input-field col s6">
-                            <input id="name" type="text" class="validate">
-                            <label for="name">NFT name</label>
-                          </div>
-                          <div class="input-field col s6">
-                            <input id="price" type="text" class="validate">
-                            <label for="price">Price</label>
-                          </div>
-                        </div>
-
-                        <div class="row header">
-                          <div class="input-field col s12">
-                                <textarea id="description" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Description</label>
-                          </div>
-                        </div>
-             
-                           <div class="row header">
-                            <div class="input-div col s12">
-                              <!-- <p>Drag & drop photos here </p> -->
-                            <input type="file" id="fileURL" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg, image/gif"/>
-                            </div>
-                           </div>
-                          
-
-                            <div class="row">
-                              <div class="col s12 ">
-                                <a class="waves-effect waves-light btn">Upload artwork</a>
-                              </div>
-                            </div>
-
-
-                            <div id="mint-message"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-             </div>
         </div>
-
-   
-            <!-- this is just for front -->
-            <form id="queued-form">
-                <div class="header">
-                    <!-- <button type="submit"> Upload</button> -->
-                </div>
-            </form>
+      </div>
+    </div>
+  </div>
 
 
-          <!-- <a class="waves-effect waves-light btn">button</a> -->
+  <!-- this is just for front -->
+  <form id="queued-form">
+    <div class="header">
+      <!-- <button type="submit"> Upload</button> -->
+    </div>
+  </form>
 
-        <div class="footer">
-            <div class="canvas-container">
-                <img src="assets-canvas/logo1.svg">
-                <img src="assets-canvas/title.svg">
-            </div>
-            <h6 class="m-0 mt-4 text-center text-white text-capitalize">Copyright &copy; 2022 PinRIT</h6>
-        </div>
 
-        <script>
+  <!-- <a class="waves-effect waves-light btn">button</a> -->
 
-        let queuedImagesArray = [],
-            savedForm = document.querySelector("#saved-form"),
-            queuedForm = document.querySelector("#queued-form"),
-            savedDiv = document.querySelector('.saved-div'),
-            queuedDiv = document.querySelector('.queued-div'),
-            inputDiv = document.querySelector('.input-div'),
-            input = document.querySelector('.input-div input'),
-            serverMessage = document.querySelector('.server-message')
-           // savedImages = JSON.parse('<%-JSON.stringify(images)%>'), // saved images array from server
-          
+  <div class="footer">
+    <div class="canvas-container">
+      <img src="assets-canvas/logo1.svg">
+      <img src="assets-canvas/title.svg">
+    </div>
+    <h6 class="m-0 mt-4 text-center text-white text-capitalize">Copyright &copy; 2022 PinRIT</h6>
+  </div>
 
-            function displayQueuedImages() {
-            // Create a variable to store HTML
-            let images = "";
-            // Iterate the queuedImages array
-            queuedImagesArray.forEach((image, index) => {
-            // For each image, create the following HTML and add it to the images variable
-                images += `<div class="image">
+  <script>
+
+    let queuedImagesArray = [],
+      savedForm = document.querySelector("#saved-form"),
+      queuedForm = document.querySelector("#queued-form"),
+      savedDiv = document.querySelector('.saved-div'),
+      queuedDiv = document.querySelector('.queued-div'),
+      inputDiv = document.querySelector('.input-div'),
+      input = document.querySelector('.input-div input'),
+      serverMessage = document.querySelector('.server-message')
+    // savedImages = JSON.parse('<%-JSON.stringify(images)%>'), // saved images array from server
+
+
+    function displayQueuedImages() {
+      // Create a variable to store HTML
+      let images = "";
+      // Iterate the queuedImages array
+      queuedImagesArray.forEach((image, index) => {
+        // For each image, create the following HTML and add it to the images variable
+        images += `<div class="image">
                             <img src="${URL.createObjectURL(image)}" alt="image">
                         </div>`;
-            })
-            // Add the variable to the queuedDiv to display images on the screen
-            queuedDiv.innerHTML = images;
-}
+      })
+      // Add the variable to the queuedDiv to display images on the screen
+      queuedDiv.innerHTML = images;
+    }
 
-            input.addEventListener("change", () => {
-            // access the user uploaded image/s
-            const files = input.files;
-            // add each of them to the queriedImages array
-            for (let i = 0; i < files.length; i++) {
-                queuedImagesArray.push(files[i])
-            }
-            // reset the form to it's default values
-            queuedForm.reset();
-            // display the uploaded images on the screen
-            displayQueuedImages()
-            })
+    input.addEventListener("change", () => {
+      // access the user uploaded image/s
+      const files = input.files;
+      // add each of them to the queriedImages array
+      for (let i = 0; i < files.length; i++) {
+        queuedImagesArray.push(files[i])
+      }
+      // reset the form to it's default values
+      queuedForm.reset();
+      // display the uploaded images on the screen
+      displayQueuedImages()
+    })
 
 
-        </script>
+  </script>
 
-            <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-            <script
-            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
-    </body>
+</body>
 
 </html>
