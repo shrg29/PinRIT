@@ -198,48 +198,38 @@ async function uploadMetadataToIPFS() {
   //TODO uploadArtwork
   async function uploadArtwork(e) {
     e.preventDefault();
-    let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
-        console.log(uint);
-    })
     //Upload data to IPFS
-    // try {
-    //     // const metadataURL = await uploadMetadataToIPFS();
-    //     //After adding your Hardhat network to your metamask, this code will get providers and signers
-    //     updateMessage("Please wait.. uploading (upto 5 mins)")
+    try {
+        //const metadataURL = await uploadMetadataToIPFS();
+        // let newPrice = ethers.utils.parseUnits(price, 'ether')
+        let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
+            // const elementTest = document.getElementById("test_text");
+            // elementTest.innerHTML = string;
+            console.log(uint);
+          })
+        
+        // let transaction = await window.contract.mint(metadataURL, newPrice, { value: listingPrice }).call()
+        // await transaction.wait()
 
-    //     //massage the params to be sent to the create NFT request
-    //     // const price = ethers.utils.parseUnits(formParams.price, 'ether')
-    //     // let listingPrice = await contract.getListPrice()
-    //     // listingPrice = listingPrice.toString()
-
-    //     // //actually create the NFT
-    //     // let transaction = await contract.createToken(metadataURL, price, { value: listingPrice })
-    //     // await transaction.wait()
-    //     let newPrice = ethers.utils.parseUnits(price, 'ether')
-    //     let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
-    //                 // const elementTest = document.getElementById("test_text");
-    //                 // elementTest.innerHTML = string;
-    //                 console.log(uint);
-    //               })
-
-    //     console.log(listingPrice.toString())
-
-    //     // let transaction = await window.contract.mint(metadataURL, newPrice, { value: listingPrice }).call()
-    //     // await transaction.wait()
-
-    //     alert("Successfully listed your NFT!");
-    //     updateMessage("");
-    //     updateFormParams("", "", "");
-    // }
-    // catch(e) {
-    //     // alert( "Upload error"+e )
-    //     console.log("Upload error" + e)
-    // }
+        //alert("Successfully listed your NFT!");
+        updateMessage("");
+        updateFormParams("", "", "");
+    }
+    catch(e) {
+        // alert( "Upload error"+e )
+        console.log("Upload error" + e)
+    }
 }
 
-
-
-
+async function test() {
+    
+    let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
+        // const elementTest = document.getElementById("test_text");
+        // elementTest.innerHTML = string;
+        console.log(uint);
+      })
+      console.log(listingPrice)
+}
 
 
 
