@@ -1,12 +1,12 @@
 
 import myJson from '../../../../Marketplace.json' assert {type: 'json'};
 
-let contract ="0xE5E559cd3C67d02840257518e81A16324C07415A"
+let contract = "0x70f0cEc50598a552464d561f93d12aa588A1422d"
 
-let name = document.getElementById("name")
-let description = document.getElementById("description")
-let price = document.getElementById("price")
-let formParams = {name, description, price}
+let name = document.getElementById("name").value;
+let description = document.getElementById("description").value;
+let price = document.getElementById("price").value;
+let fileURL = ""
 
 //loading web3
 async function loadWeb3() {
@@ -68,28 +68,6 @@ async function printAccount() {
     accountAddress.appendChild(textNode);
 }
 
-
-async function uploadArtwork(e) {
-    e.preventDefault();
-
-    try {
-        const metadataURL = await uploadMetadataToIPFS();
-        //linija 101 provjeriti tf does it do
-        const price = ethers.utils.parseUnits(formParams.price, 'ether')
-        let listingPrice = await window.contract.getListPrice()
-        listingPrice = listingPrice.toString()
-
-        //call a mint function from contract and pay the price
-        let transaction = await window.contract.mint(metadataURL, price, { value: listingPrice })
-        await transaction.wait()
-
-        alert("Gg dog");
-    }
-    catch(e) {
-        alert( "Upload error"+e )
-    }
-}
-
 //ovo se desi drugo
 function uploadJSONToIPFS(JSONBody) {
 
@@ -136,8 +114,8 @@ const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
           maxBodyLength: 'Infinity',
           headers: {
               'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-              pinata_api_key: key,
-              pinata_secret_api_key: secret,
+              pinata_api_key: '697b58916befdfdf20bb',
+              pinata_secret_api_key: 'a94852cfef4ce49665f7eeae6574311e920141117e664381fac1ffbe2b627a70',
           }
       })
       .then(function (response) {
@@ -158,6 +136,7 @@ const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
 
 
 async function OnChangeFile(e) {
+    console.log("slay")
     var file = e.target.files[0];
     //check for file extension
     try {
@@ -165,7 +144,7 @@ async function OnChangeFile(e) {
         const response = await uploadFileToIPFS(file);
         if(response.success === true) {
             console.log("Uploaded image to Pinata: ", response.pinataURL)
-            setFileURL(response.pinataURL);
+            fileURL = response.pinataURL
         }
     }
     catch(e) {
@@ -176,10 +155,10 @@ async function OnChangeFile(e) {
 async function uploadMetadataToIPFS() {
   
     console.log("dog")
-    let name = document.getElementById("name");
-    let description = document.getElementById("description");
-    let artPrice = document.getElementById("price");
-    let fileURL = document.getElementById("fileURL");
+
+    name = document.getElementById("name").value;
+    description = document.getElementById("description").value;
+    price = document.getElementById("price").value;
     //Make sure that none of the fields are empty
     if( !name || !description || !price || !fileURL)
         return;
@@ -201,11 +180,62 @@ async function uploadMetadataToIPFS() {
     }
   }
   const element = document.getElementById("fileURL");
-  element.addEventListener("click", OnChangeFile());
+  element.addEventListener("change", OnChangeFile);
   
+  function updateMessage(newMessage){
+    document.getElementById("uploadMessage") = newMessage
+  }
+
+  function updateFormParams(newName, newDescription, newPrice) {
+    name = newName
+    description = newDescription
+    price = newPrice
+  }
+
+  const addButton = document.getElementById("buttonUpload");
+  addButton.addEventListener("click", uploadArtwork);
 
   //TODO uploadArtwork
+  async function uploadArtwork(e) {
+    e.preventDefault();
+    let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
+        console.log(uint);
+    })
+    //Upload data to IPFS
+    // try {
+    //     // const metadataURL = await uploadMetadataToIPFS();
+    //     //After adding your Hardhat network to your metamask, this code will get providers and signers
+    //     updateMessage("Please wait.. uploading (upto 5 mins)")
 
+    //     //massage the params to be sent to the create NFT request
+    //     // const price = ethers.utils.parseUnits(formParams.price, 'ether')
+    //     // let listingPrice = await contract.getListPrice()
+    //     // listingPrice = listingPrice.toString()
+
+    //     // //actually create the NFT
+    //     // let transaction = await contract.createToken(metadataURL, price, { value: listingPrice })
+    //     // await transaction.wait()
+    //     let newPrice = ethers.utils.parseUnits(price, 'ether')
+    //     let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
+    //                 // const elementTest = document.getElementById("test_text");
+    //                 // elementTest.innerHTML = string;
+    //                 console.log(uint);
+    //               })
+
+    //     console.log(listingPrice.toString())
+
+    //     // let transaction = await window.contract.mint(metadataURL, newPrice, { value: listingPrice }).call()
+    //     // await transaction.wait()
+
+    //     alert("Successfully listed your NFT!");
+    //     updateMessage("");
+    //     updateFormParams("", "", "");
+    // }
+    // catch(e) {
+    //     // alert( "Upload error"+e )
+    //     console.log("Upload error" + e)
+    // }
+}
 
 
 
@@ -232,6 +262,8 @@ async function load() {
     await printAccount();
     await loadWeb3();
     window.contract = await loadContract();
+    // console.log(contract)
+    console.log(contract.methods)
     await getAllAccounts();
 }
 
