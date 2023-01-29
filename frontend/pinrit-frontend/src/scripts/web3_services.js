@@ -7,6 +7,8 @@ let name = document.getElementById("name").value;
 let description = document.getElementById("description").value;
 let price = document.getElementById("price").value;
 let fileURL = ""
+let nftData
+let fetched = false
 
 //loading web3
 async function loadWeb3() {
@@ -221,6 +223,41 @@ async function uploadMetadataToIPFS() {
     }
 }
 
+function updateImages(items){
+    nftData = items
+}
+
+function updateFetched(isFetched){
+    fetched = isFetched
+}
+
+//TODO get all NFT's
+async function getAllNFTs(){
+    let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
+        console.log(JSON.stringify(array));
+
+        let newTransaction = array
+        
+        console.log(contract.methods)
+
+        const items = Promise.all(newTransaction.map(async i => {
+            console.log(i)
+            const tokenURI = await window.contract.methods.tokenURI(i.tokenId).call()
+            let meta = await axios.get(tokenURI);
+            meta = meta.data;
+    
+            let item = {
+                image: meta.image,
+            }
+            return item;
+        }))
+
+        updateFetched(true)
+        updateImages(items)
+
+        })
+
+}
 
 async function test() {
 
@@ -228,8 +265,8 @@ async function test() {
     console.log(JSON.stringify(array));
     })
 
-
 }
+
 
 
 // const [dataFetched, updateFetched] = useState(false);
@@ -277,7 +314,10 @@ async function load() {
     window.contract = await loadContract();
     // console.log(contract)
     await getAllAccounts();
-    await test()
+    if(!fetched) {
+        getAllNFTs()
+        document.getElementById("nftData").appendChild(nftData.image)
+    }
 }
 
 load();

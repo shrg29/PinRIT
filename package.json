@@ -44,6 +44,7 @@
     "axios": "^0.27.2",
     "dotenv": "^16.0.3",
     "fs": "*",
+    "js-ipfs": "^0.0.301",
     "materialize-css": "^1.0.0-rc.2",
     "path-browserify": "^1.0.1",
     "web-vitals": "^2.1.4",
