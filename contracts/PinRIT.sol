@@ -10,6 +10,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 contract PinRIT is ERC721URIStorage {
  
     using Counters for Counters.Counter;
+    Counters.Counter private _nftsSold;
     Counters.Counter private _tokenIDs;
     address payable contractOwner; 
     uint256 listPrice = 0.001 ether;
@@ -92,7 +93,19 @@ contract PinRIT is ERC721URIStorage {
     }
 
 
+    function buyNFT(uint256 tokenId) public payable {
+        uint price = IDToMintedNFT[tokenId].price;
+        address seller = IDToMintedNFT[tokenId].seller;
+        require(msg.value == price, "Please submit the asking price in order to complete the purchase");
 
+        IDToMintedNFT[tokenId].currentlyListed = true;
+        IDToMintedNFT[tokenId].seller = payable(msg.sender);
+        _nftsSold.increment();
+        _transfer(address(this), msg.sender, tokenId);
+        approve(address(this), tokenId);
+        payable(contractOwner).transfer(listPrice);
+        payable(seller).transfer(msg.value);
+    }
 
 
 }
