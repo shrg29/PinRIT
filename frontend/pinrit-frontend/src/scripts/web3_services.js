@@ -195,10 +195,6 @@ async function uploadMetadataToIPFS() {
   const addButton = document.getElementById("buttonUpload");
   addButton.addEventListener("click", uploadArtwork);
 
-  async function getCurrentAccount() {
-    const accounts = await window.web3.eth.getAccounts();
-    return accounts[0];
-}
 
   //TODO uploadArtwork
   async function uploadArtwork(e) {
@@ -206,7 +202,7 @@ async function uploadMetadataToIPFS() {
     //Upload data to IPFS
     try {
         const metadataURL = await uploadMetadataToIPFS();
-        let newPrice = ethers.utils.parseUnits(price, 'ether')
+       let newPrice = "1"
         // let newListingPrice
         // let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
         //     console.log(uint);
@@ -220,9 +216,8 @@ async function uploadMetadataToIPFS() {
 
         // let etherValue = Web3.utils.fromWei(newListingPrice, 'ether');
         
-        const account = await getCurrentAccount()
 
-        let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({value: web3.utils.toWei(String(0.001), 'ether'), from: account})
+        let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({from: "0x94d78Afd30D15563d2F6eB401622AeE864aD83e6", gas: 3000000, value: web3.utils.toWei(String(0.001),'ether')}, function(err, res){})
         await transaction.wait()
 
         //alert("Successfully listed your NFT!");
@@ -235,6 +230,14 @@ async function uploadMetadataToIPFS() {
     }
 }
 
+
+async function test() {
+
+    let listingPrice = await contract.methods.getAllNFTs().call().then(function (array) {
+            console.log(array);
+        })
+
+}
 // // printing test data
 // async function mint() {
 //     window.contract.methods
@@ -257,6 +260,7 @@ async function load() {
     // console.log(contract)
     console.log(contract.methods)
     await getAllAccounts();
+    await test()
 }
 
 load();
