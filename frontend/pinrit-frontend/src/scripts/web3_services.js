@@ -63,6 +63,7 @@ async function printAccount() {
     await window.ethereum.enable();
     const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
     const account = accounts[0];
+    console.log("My Metamask address: " + account)
     let accountAddress = document.getElementById("connected-account-address");
     let textNode = document.createTextNode(account);
     accountAddress.appendChild(textNode);
@@ -180,7 +181,7 @@ async function uploadMetadataToIPFS() {
     }
   }
   const element = document.getElementById("fileURL");
-  element.addEventListener("change", OnChangeFile);
+   element.addEventListener("change", OnChangeFile);
   
   function updateMessage(newMessage){
     document.getElementById("uploadMessage") = newMessage
@@ -202,25 +203,15 @@ async function uploadMetadataToIPFS() {
     //Upload data to IPFS
     try {
         const metadataURL = await uploadMetadataToIPFS();
-       let newPrice = "1"
-        // let newListingPrice
-        // let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
-        //     console.log(uint);
-        //     newListingPrice = uint
-        // })
+       let newPrice = document.getElementById("price").value;
+       await window.ethereum.enable();
+       const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
+       const account = accounts[0];
 
-        // window.web3.eth.getAccounts(function (err, accounts) {
-        //     account = accounts[0];
-        //     web3.eth.defaultAccount = account;
-        // });
-
-        // let etherValue = Web3.utils.fromWei(newListingPrice, 'ether');
-        
-
-        let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({from: "0x94d78Afd30D15563d2F6eB401622AeE864aD83e6", gas: 3000000, value: web3.utils.toWei(String(0.001),'ether')}, function(err, res){})
+        let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({from: account, gas: 3000000, value: web3.utils.toWei(String(0.001),'ether')}, function(err, res){})
         await transaction.wait()
 
-        //alert("Successfully listed your NFT!");
+        alert("Successfully listed your NFT!");
         updateMessage("");
         updateFormParams("", "", "");
     }
@@ -233,22 +224,49 @@ async function uploadMetadataToIPFS() {
 
 async function test() {
 
-    let listingPrice = await contract.methods.getAllNFTs().call().then(function (array) {
-            console.log(array);
-        })
+    await contract.methods.getAllNFTs().call().then(function (array) {
+    console.log(JSON.stringify(array));
+    })
+
 
 }
-// // printing test data
-// async function mint() {
-//     window.contract.methods
-//       .mintNFT()
-//       .call()
-//       .then(function (uint) {
-//         const elementTest = document.getElementById("test_text");
-//         elementTest.innerHTML = string;
-//         console.log(string);
-//       });
-//   }
+
+
+// const [dataFetched, updateFetched] = useState(false);
+
+// async function displayNFTs() {
+
+//         let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
+//           console.log(JSON.stringify(array));
+//            })
+
+
+//     //Fetch all the details of every NFT from the contract and display
+//     const items = await Promise.all(transaction.map(async i => {
+//         const tokenURI = await contract.tokenURI(i.tokenId);
+//         let meta = await axios.get(tokenURI);
+//         meta = meta.data;
+
+//         let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+//         let item = {
+//             price,
+//             tokenId: i.tokenId.toNumber(),
+//             seller: i.seller,
+//             owner: i.owner,
+//             image: meta.image,
+//             name: meta.name,
+//             description: meta.description,
+//         }
+//         return item;
+//     }))
+
+//     updateFetched(true);
+//     updateData(items);
+// }
+
+// if(!dataFetched)
+//     getAllNFTs();
+
 
 
 
@@ -258,7 +276,6 @@ async function load() {
     await loadWeb3();
     window.contract = await loadContract();
     // console.log(contract)
-    console.log(contract.methods)
     await getAllAccounts();
     await test()
 }

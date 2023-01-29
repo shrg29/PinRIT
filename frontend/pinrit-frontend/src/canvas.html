@@ -51,20 +51,21 @@
             <div class="cont">
               <span class="card-title">Pin something to PinRIT</span>
 
+
               <div class="row header">
                 <div class="input-field col s6">
-                  <input id="name" type="text" class="validate">
+                  <input placeholder="NFT name" id="name" type="text" class="validate">
                   <label for="name"></label>
                 </div>
                 <div class="input-field col s6">
-                  <input id="price" type="text" class="validate">
+                  <input placeholder="Price in ETH" id="price" type="text" class="validate">
                   <label for="price"></label>
                 </div>
               </div>
 
               <div class="row header">
                 <div class="input-field col s12">
-                  <textarea id="description" class="materialize-textarea"></textarea>
+                  <textarea placeholder="NFT description" id="description" class="materialize-textarea"></textarea>
                   <label for="textarea1"></label>
                 </div>
               </div>
@@ -116,43 +117,43 @@
 
   <script>
 
-    let queuedImagesArray = [],
-      savedForm = document.querySelector("#saved-form"),
-      queuedForm = document.querySelector("#queued-form"),
-      savedDiv = document.querySelector('.saved-div'),
-      queuedDiv = document.querySelector('.queued-div'),
-      inputDiv = document.querySelector('.input-div'),
-      input = document.querySelector('.input-div input'),
-      serverMessage = document.querySelector('.server-message')
-    // savedImages = JSON.parse('<%-JSON.stringify(images)%>'), // saved images array from server
+    // let queuedImagesArray = [],
+    //   savedForm = document.querySelector("#saved-form"),
+    //   queuedForm = document.querySelector("#queued-form"),
+    //   savedDiv = document.querySelector('.saved-div'),
+    //   queuedDiv = document.querySelector('.queued-div'),
+    //   inputDiv = document.querySelector('.input-div'),
+    //   input = document.querySelector('.input-div input'),
+    //   serverMessage = document.querySelector('.server-message')
+    // // savedImages = JSON.parse('<%-JSON.stringify(images)%>'), // saved images array from server
 
 
-    function displayQueuedImages() {
-      // Create a variable to store HTML
-      let images = "";
-      // Iterate the queuedImages array
-      queuedImagesArray.forEach((image, index) => {
-        // For each image, create the following HTML and add it to the images variable
-        images += `<div class="image">
-                            <img src="${URL.createObjectURL(image)}" alt="image">
-                        </div>`;
-      })
-      // Add the variable to the queuedDiv to display images on the screen
-      queuedDiv.innerHTML = images;
-    }
+    // function displayQueuedImages() {
+    //   // Create a variable to store HTML
+    //   let images = "";
+    //   // Iterate the queuedImages array
+    //   queuedImagesArray.forEach((image, index) => {
+    //     // For each image, create the following HTML and add it to the images variable
+    //     images += `<div class="image">
+    //                         <img src="${URL.createObjectURL(image)}" alt="image">
+    //                     </div>`;
+    //   })
+    //   // Add the variable to the queuedDiv to display images on the screen
+    //   queuedDiv.innerHTML = images;
+    // }
 
-    input.addEventListener("change", () => {
-      // access the user uploaded image/s
-      const files = input.files;
-      // add each of them to the queriedImages array
-      for (let i = 0; i < files.length; i++) {
-        queuedImagesArray.push(files[i])
-      }
-      // reset the form to it's default values
-      queuedForm.reset();
-      // display the uploaded images on the screen
-      displayQueuedImages()
-    })
+    // input.addEventListener("change", () => {
+    //   // access the user uploaded image/s
+    //   const files = input.files;
+    //   // add each of them to the queriedImages array
+    //   for (let i = 0; i < files.length; i++) {
+    //     queuedImagesArray.push(files[i])
+    //   }
+    //   // reset the form to it's default values
+    //   queuedForm.reset();
+    //   // display the uploaded images on the screen
+    //   displayQueuedImages()
+    // })
 
 
 </script>

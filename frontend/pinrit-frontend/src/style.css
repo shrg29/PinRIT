@@ -119,12 +119,21 @@ body {
 
 }
 
+input {
+  color: white;
+}
+
+textarea {
+  color: white;
+}
+
 .input-field {
   border-style: solid;
   border-radius: 1em;
   background-color: #111535;
   border-color: #04B6D4;
   border-width: 2.5px;
+  color: white;
 }
 
 .btn {
