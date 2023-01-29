@@ -195,21 +195,35 @@ async function uploadMetadataToIPFS() {
   const addButton = document.getElementById("buttonUpload");
   addButton.addEventListener("click", uploadArtwork);
 
+  async function getCurrentAccount() {
+    const accounts = await window.web3.eth.getAccounts();
+    return accounts[0];
+}
+
   //TODO uploadArtwork
   async function uploadArtwork(e) {
     e.preventDefault();
     //Upload data to IPFS
     try {
-        //const metadataURL = await uploadMetadataToIPFS();
-        // let newPrice = ethers.utils.parseUnits(price, 'ether')
-        let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
-            // const elementTest = document.getElementById("test_text");
-            // elementTest.innerHTML = string;
-            console.log(uint);
-          })
+        const metadataURL = await uploadMetadataToIPFS();
+        let newPrice = ethers.utils.parseUnits(price, 'ether')
+        // let newListingPrice
+        // let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
+        //     console.log(uint);
+        //     newListingPrice = uint
+        // })
+
+        // window.web3.eth.getAccounts(function (err, accounts) {
+        //     account = accounts[0];
+        //     web3.eth.defaultAccount = account;
+        // });
+
+        // let etherValue = Web3.utils.fromWei(newListingPrice, 'ether');
         
-        // let transaction = await window.contract.mint(metadataURL, newPrice, { value: listingPrice }).call()
-        // await transaction.wait()
+        const account = await getCurrentAccount()
+
+        let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({value: web3.utils.toWei(String(0.001), 'ether'), from: account})
+        await transaction.wait()
 
         //alert("Successfully listed your NFT!");
         updateMessage("");
@@ -220,18 +234,6 @@ async function uploadMetadataToIPFS() {
         console.log("Upload error" + e)
     }
 }
-
-async function test() {
-    
-    let listingPrice = await contract.methods.getListPrice().call().then(function (uint) {
-        // const elementTest = document.getElementById("test_text");
-        // elementTest.innerHTML = string;
-        console.log(uint);
-      })
-      console.log(listingPrice)
-}
-
-
 
 // // printing test data
 // async function mint() {
