@@ -1,7 +1,7 @@
 
 import myJson from '../../../../Marketplace.json' assert {type: 'json'};
 
-let contract = "0x70f0cEc50598a552464d561f93d12aa588A1422d"
+let contract = "0x274374bE9BFc574ce57224526d6C5729E97dc992"
 
 let name = document.getElementById("name").value;
 let description = document.getElementById("description").value;
@@ -233,38 +233,58 @@ function updateFetched(isFetched){
 
 //TODO get all NFT's
 async function getAllNFTs(){
+
+    let listOfUrls = ""
+
     let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
-        console.log(JSON.stringify(array));
-
-        let newTransaction = array
-        
-        console.log(contract.methods)
-
-        const items = Promise.all(newTransaction.map(async i => {
-            console.log(i)
-            const tokenURI = await window.contract.methods.tokenURI(i.tokenId).call()
-            let meta = await axios.get(tokenURI);
-            meta = meta.data;
+        //console.log(JSON.stringify(array));
     
-            let item = {
-                image: meta.image,
-            }
-            return item;
-        }))
+       let newTransaction = array
+        
+     //   console.log(contract.methods)
+        return Promise.all(newTransaction.map(async i => {
+            console.log("Ovo povucem za svaki token: " + i)
+           const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
+           
+            //radi
+            //console.log(tokenURI)
+          //  const tokenURI = 'https://gateway.pinata.cloud/ipfs/QmXQyyzqJezG8SjtufbFvpQsQmGyMjTUKbJHgZk5k5oNeL'
+           
+            //let meta = await axios.get(tokenURI, {withCredentials: false});
+          //  let meta = await
+            
+          return tokenURI
+        })).then(results => {
+            listOfUrls = results
+            return results
+         //   let pictures = results.map( singleurl => {
 
-        updateFetched(true)
-        updateImages(items)
+               // console.log()
+            // let meta =  axios.get(results[0], {withCredentials: false}).then(results => {
+            //             console.log(results.data)
+            //         })
+            // }
+
+            // )
 
         })
+
+        // updateFetched(true)
+        // updateImages(items)
+
+        })
+return transaction
+       // console.log(transaction)
+        // let meta =  axios.get(listOfUrls[0], {withCredentials: false}).then(results => {
+        //     console.log(results.data)
+        // })
 
 }
 
 async function test() {
 
-    await contract.methods.getAllNFTs().call().then(function (array) {
-    console.log(JSON.stringify(array));
-    })
-
+   let test =  await contract.methods.getAllNFTs().call()
+   console.log("IM HEREEEEWEE" + test)
 }
 
 
@@ -307,17 +327,39 @@ async function test() {
 
 
 
-async function load() {
-  console.log("successful Metamask connection");
+ async function load() {
+//             const tokenURI = 'https://gateway.pinata.cloud/ipfs/QmXQyyzqJezG8SjtufbFvpQsQmGyMjTUKbJHgZk5k5oNeL'
+//            let meta = await axios.get(tokenURI, {withCredentials: false});
+// console.log(meta.data)
+
+//   console.log("successful Metamask connection");
     await printAccount();
     await loadWeb3();
     window.contract = await loadContract();
     // console.log(contract)
     await getAllAccounts();
     if(!fetched) {
-        getAllNFTs()
-        document.getElementById("nftData").appendChild(nftData.image)
+        let listOfUrls = await getAllNFTs() // vraca sve urlove NFT-eva
+        
+        console.log(listOfUrls)
+
+        let actualUrl = 'https://gateway.pinata.cloud/ipfs/QmSqYgYMG9kAvp4d9Xna384TzSiyvuwgDC14VAX4z1uUat'
+        let newEst = 'https://gateway.pinata.cloud/ipfs/QmVaaN3AkuZAQPLYmR3WvM7sq7Yig8JHwt54oXVatDbEVX'
+        let tokenURI = 'https://gateway.pinata.cloud/ipfs/QmXQyyzqJezG8SjtufbFvpQsQmGyMjTUKbJHgZk5k5oNeL' // - ovaj radi
+        console.log(tokenURI)
+        // ovdje je Promise izgelda overloaded - ovo pada
+      await axios.get(tokenURI, {withCredentials: false}).then(results => {
+            console.log(results.data)
+                  updateFetched(true)
+         updateImages(results.data)
+//updateData(results.data);
+        })
+
+        const img = document.querySelector("img"); 
+       img.src = nftData.image;
+      document.getElementById("nftData").appendChild(img)
     }
+  // await test()
 }
 
 load();

@@ -186,11 +186,18 @@ background-color: #575FA8;
     color: white;
     font-weight: bold;
   }
+
+  #nftData img{
+    height: 60px;
+    width: 60px;
+    padding: 0.5em;
+    border-radius: 15px;
+   
+  }
   
-  .saved-div,
-  .queued-div {
+  /* .queued-div {
     width: 100%;
-    min-height: 50px;
+    height: 60px;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -198,45 +205,5 @@ background-color: #575FA8;
     position: relative;
     border-radius: 5px;
     border: 1px dotted black;
-  }
+  } */
   
-  .saved-div .image,
-  .queued-div .image {
-    height: 50px;
-    width: 50px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .saved-div .image:nth-child(4n),
-  .queued-div .image:nth-child(4n) {
-    margin-right: 0;
-  }
-  
-  .saved-div .image img,
-  .queued-div .image img {
-    height: 100%;
-    width: 100%;
-  }
-  
-  .saved-div .image span,
-  .queued-div .image span {
-    position: absolute;
-    top: -4px;
-    right: 4px;
-    cursor: pointer;
-    font-size: 22px;
-    color: white;
-  }
-  
-  .saved-div .image span:hover,
-  .queued-div .image span:hover {
-    opacity: 0.8;
-  }
-  
-  .saved-div .span--hidden,
-  .queued-div .span--hidden {
-    visibility: hidden;
-  }
