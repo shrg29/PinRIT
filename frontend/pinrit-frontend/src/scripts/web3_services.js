@@ -203,6 +203,9 @@ async function uploadMetadataToIPFS() {
   async function uploadArtwork(e) {
     e.preventDefault();
     //Upload data to IPFS
+    // let waitMsg = document.getElementById("waitMSg");
+    // let textNode = document.createTextNode("Artwork uploading...15 sec");
+    // waitMsg.appendChild(textNode);
     try {
         const metadataURL = await uploadMetadataToIPFS();
        let newPrice = document.getElementById("price").value;
@@ -213,12 +216,13 @@ async function uploadMetadataToIPFS() {
         let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({from: account, gas: 3000000, value: web3.utils.toWei(String(0.001),'ether')}, function(err, res){})
         await transaction.wait()
 
-        alert("Successfully listed your NFT!");
+        //TODO loading message
         updateMessage("");
         updateFormParams("", "", "");
     }
     catch(e) {
-        // alert( "Upload error"+e )
+        alert("Succesfully uploaded artwork!")
+        load();
         console.log("Upload error" + e)
     }
 }
@@ -235,15 +239,12 @@ function updateFetched(isFetched){
 async function getAllNFTs(){
 
     let listOfUrls = ""
-
     let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
-        //console.log(JSON.stringify(array));
     
        let newTransaction = array
-        
-     //   console.log(contract.methods)
+    
         return Promise.all(newTransaction.map(async i => {
-            console.log("Ovo povucem za svaki token: " + i)
+            console.log("NFT: "+ i)
            const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
            
             //radi
@@ -274,20 +275,8 @@ async function getAllNFTs(){
 
         })
 return transaction
-       // console.log(transaction)
-        // let meta =  axios.get(listOfUrls[0], {withCredentials: false}).then(results => {
-        //     console.log(results.data)
-        // })
 
 }
-
-async function test() {
-
-   let test =  await contract.methods.getAllNFTs().call()
-   console.log("IM HEREEEEWEE" + test)
-}
-
-
 
 // const [dataFetched, updateFetched] = useState(false);
 
@@ -325,8 +314,12 @@ async function test() {
 //     getAllNFTs();
 
 
+async function test() {
 
-
+    let test =  await contract.methods.getAllNFTs().call()
+    console.log("IM HEREEEEWEE" + test)
+ }
+ 
  async function load() {
 //             const tokenURI = 'https://gateway.pinata.cloud/ipfs/QmXQyyzqJezG8SjtufbFvpQsQmGyMjTUKbJHgZk5k5oNeL'
 //            let meta = await axios.get(tokenURI, {withCredentials: false});
@@ -340,26 +333,27 @@ async function test() {
     await getAllAccounts();
     if(!fetched) {
         let listOfUrls = await getAllNFTs() // vraca sve urlove NFT-eva
-        
+    
         console.log(listOfUrls)
-
-        let actualUrl = 'https://gateway.pinata.cloud/ipfs/QmSqYgYMG9kAvp4d9Xna384TzSiyvuwgDC14VAX4z1uUat'
-        let newEst = 'https://gateway.pinata.cloud/ipfs/QmVaaN3AkuZAQPLYmR3WvM7sq7Yig8JHwt54oXVatDbEVX'
-        let tokenURI = 'https://gateway.pinata.cloud/ipfs/QmXQyyzqJezG8SjtufbFvpQsQmGyMjTUKbJHgZk5k5oNeL' // - ovaj radi
-        console.log(tokenURI)
-        // ovdje je Promise izgelda overloaded - ovo pada
-      await axios.get(tokenURI, {withCredentials: false}).then(results => {
-            console.log(results.data)
-                  updateFetched(true)
-         updateImages(results.data)
-//updateData(results.data);
-        })
-
-        const img = document.querySelector("img"); 
-       img.src = nftData.image;
-      document.getElementById("nftData").appendChild(img)
+        
+        const responses = await Promise.all(listOfUrls.map(url => fetch(url).then(res => res.json())))
+        
+        const root = document.getElementById("nftData");
+        for (const response of responses) {
+            const img = document.createElement("img");
+            img.src = response.image;
+            root.appendChild(img);
+        }
+    
+        updateFetched(true)
+        updateImages(results)
     }
+    //todo err handling 
   // await test()
 }
 
 load();
+
+
+
+

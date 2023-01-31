@@ -18,6 +18,8 @@
   <script type="module" src="scripts/web3_services.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+
+
 </head>
 
 <body>
@@ -38,12 +40,11 @@
     <div class="row">
       <div class="col s12 m5 z-depth-3">
         <div class="canvas-panel">
-          <div class="queued-div ">
+          <div class="queued-div p-1">
           <div id="nftData"></div>
         </div>
         </div>
       </div>
-
     </div>
 
     <div class="row">
@@ -87,10 +88,10 @@
               <div class="row">
                 <div class="col s12 ">
                   <!-- pozovi uploadArtwork funkciju -->
+                   <div id="waitMsg"></div>
                     <a class="waves-effect waves-light btn" id="buttonUpload">Upload artwork</a>
                 </div>
               </div>
-              <div id="mint-message"></div>
             </div>
           </div>
         </div>
@@ -110,62 +111,33 @@
   <!-- <a class="waves-effect waves-light btn">button</a> -->
 
   <div class="footer">
-    <div class="canvas-container">
+    <div class="m-2">
       <img src="assets-canvas/logo1.svg">
       <img src="assets-canvas/title.svg">
     </div>
-    <h6 class="m-0 mt-4 text-center text-white text-capitalize">Copyright &copy; 2022 PinRIT</h6>
+    <div class="p-3">
+      <a href="#" class="fa fa-facebook"></a>
+      <a href="#" class="fa fa-twitter"></a>
+      <a href="#" class="fa fa-snapchat-ghost"></a>
+      <a href="#" class="fa fa-youtube"></a>
+      
+    </div>
+    <div class=" p-3">
+    <h6>BC1.Moomins RIT Croatia</h6>
+    <h6>ISTE-501</h6>
+    <h6 class="m-2 text-center text-white text-capitalize p-2">Copyright &copy; 2023 PinRIT</h6>
   </div>
-
-  <script>
-
-    // let queuedImagesArray = [],
-    //   savedForm = document.querySelector("#saved-form"),
-    //   queuedForm = document.querySelector("#queued-form"),
-    //   savedDiv = document.querySelector('.saved-div'),
-    //   queuedDiv = document.querySelector('.queued-div'),
-    //   inputDiv = document.querySelector('.input-div'),
-    //   input = document.querySelector('.input-div input'),
-    //   serverMessage = document.querySelector('.server-message')
-    // // savedImages = JSON.parse('<%-JSON.stringify(images)%>'), // saved images array from server
-
-
-    // function displayQueuedImages() {
-    //   // Create a variable to store HTML
-    //   let images = "";
-    //   // Iterate the queuedImages array
-    //   queuedImagesArray.forEach((image, index) => {
-    //     // For each image, create the following HTML and add it to the images variable
-    //     images += `<div class="image">
-    //                         <img src="${URL.createObjectURL(image)}" alt="image">
-    //                     </div>`;
-    //   })
-    //   // Add the variable to the queuedDiv to display images on the screen
-    //   queuedDiv.innerHTML = images;
-    // }
-
-    // input.addEventListener("change", () => {
-    //   // access the user uploaded image/s
-    //   const files = input.files;
-    //   // add each of them to the queriedImages array
-    //   for (let i = 0; i < files.length; i++) {
-    //     queuedImagesArray.push(files[i])
-    //   }
-    //   // reset the form to it's default values
-    //   queuedForm.reset();
-    //   // display the uploaded images on the screen
-    //   displayQueuedImages()
-    // })
-
-
-</script>
+  </div>
   
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script>
+
+  </script>
 
 </body>
 
