@@ -1,7 +1,7 @@
 
 import myJson from '../../../../Marketplace.json' assert {type: 'json'};
 
-let contract = "0x274374bE9BFc574ce57224526d6C5729E97dc992"
+let contract = "0xE8b3931Ac0C191df173111B5798A57Cff6bDc449"
 
 let name = document.getElementById("name").value;
 let description = document.getElementById("description").value;
