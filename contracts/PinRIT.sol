@@ -108,4 +108,30 @@ contract PinRIT is ERC721URIStorage {
     }
 
 
+        //get specific NFTs from current owner
+     function getMyNFTs() public view returns (MintedNFT[] memory) {
+        uint totalItemCount = _tokenIDs.current();
+        uint itemCount = 0;
+        uint currentIndex = 0;
+        
+        for(uint i=0; i < totalItemCount; i++)
+        {
+            if(IDToMintedNFT[i+1].owner == msg.sender || IDToMintedNFT[i+1].seller == msg.sender){
+                itemCount += 1;
+            }
+        }
+
+        MintedNFT[] memory items = new MintedNFT[](itemCount);
+        for(uint i=0; i < totalItemCount; i++) {
+            if(IDToMintedNFT[i+1].owner == msg.sender || IDToMintedNFT[i+1].seller == msg.sender) {
+                uint currentId = i+1;
+                MintedNFT storage currentItem = IDToMintedNFT[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+        return items;
+    }
+
+
 }

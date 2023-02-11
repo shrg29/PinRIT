@@ -157,8 +157,6 @@ async function OnChangeFile(e) {
 
 async function uploadMetadataToIPFS() {
   
-    console.log("dog")
-
     name = document.getElementById("name").value;
     description = document.getElementById("description").value;
     price = document.getElementById("price").value;
@@ -195,17 +193,15 @@ async function uploadMetadataToIPFS() {
     price = newPrice
   }
 
+
+    //UPLOAD ARTWORK
   const addButton = document.getElementById("buttonUpload");
   addButton.addEventListener("click", uploadArtwork);
 
 
-  //TODO uploadArtwork
   async function uploadArtwork(e) {
     e.preventDefault();
-    //Upload data to IPFS
-    // let waitMsg = document.getElementById("waitMSg");
-    // let textNode = document.createTextNode("Artwork uploading...15 sec");
-    // waitMsg.appendChild(textNode);
+
     try {
         const metadataURL = await uploadMetadataToIPFS();
        let newPrice = document.getElementById("price").value;
@@ -215,10 +211,6 @@ async function uploadMetadataToIPFS() {
 
         let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({from: account, gas: 3000000, value: web3.utils.toWei(String(0.001),'ether')}, function(err, res){})
         await transaction.wait()
-
-        //TODO loading message
-        updateMessage("");
-        updateFormParams("", "", "");
     }
     catch(e) {
         alert("Succesfully uploaded artwork!")
@@ -246,72 +238,17 @@ async function getAllNFTs(){
         return Promise.all(newTransaction.map(async i => {
             console.log("NFT: "+ i)
            const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
-           
-            //radi
-            //console.log(tokenURI)
-          //  const tokenURI = 'https://gateway.pinata.cloud/ipfs/QmXQyyzqJezG8SjtufbFvpQsQmGyMjTUKbJHgZk5k5oNeL'
-           
-            //let meta = await axios.get(tokenURI, {withCredentials: false});
-          //  let meta = await
-            
+   
           return tokenURI
         })).then(results => {
             listOfUrls = results
             return results
-         //   let pictures = results.map( singleurl => {
-
-               // console.log()
-            // let meta =  axios.get(results[0], {withCredentials: false}).then(results => {
-            //             console.log(results.data)
-            //         })
-            // }
-
-            // )
 
         })
-
-        // updateFetched(true)
-        // updateImages(items)
-
         })
 return transaction
 
 }
-
-// const [dataFetched, updateFetched] = useState(false);
-
-// async function displayNFTs() {
-
-//         let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
-//           console.log(JSON.stringify(array));
-//            })
-
-
-//     //Fetch all the details of every NFT from the contract and display
-//     const items = await Promise.all(transaction.map(async i => {
-//         const tokenURI = await contract.tokenURI(i.tokenId);
-//         let meta = await axios.get(tokenURI);
-//         meta = meta.data;
-
-//         let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
-//         let item = {
-//             price,
-//             tokenId: i.tokenId.toNumber(),
-//             seller: i.seller,
-//             owner: i.owner,
-//             image: meta.image,
-//             name: meta.name,
-//             description: meta.description,
-//         }
-//         return item;
-//     }))
-
-//     updateFetched(true);
-//     updateData(items);
-// }
-
-// if(!dataFetched)
-//     getAllNFTs();
 
 
 async function test() {
@@ -319,21 +256,17 @@ async function test() {
     let test =  await contract.methods.getAllNFTs().call()
     console.log("IM HEREEEEWEE" + test)
  }
- 
- async function load() {
-//             const tokenURI = 'https://gateway.pinata.cloud/ipfs/QmXQyyzqJezG8SjtufbFvpQsQmGyMjTUKbJHgZk5k5oNeL'
-//            let meta = await axios.get(tokenURI, {withCredentials: false});
-// console.log(meta.data)
 
-//   console.log("successful Metamask connection");
+ //loads at page rendering
+ async function load() {
+
     await printAccount();
     await loadWeb3();
     window.contract = await loadContract();
-    // console.log(contract)
     await getAllAccounts();
+
     if(!fetched) {
         let listOfUrls = await getAllNFTs() // vraca sve urlove NFT-eva
-    
         console.log(listOfUrls)
         
         const responses = await Promise.all(listOfUrls.map(url => fetch(url).then(res => res.json())))
@@ -346,10 +279,8 @@ async function test() {
         }
     
         updateFetched(true)
-        updateImages(results)
     }
-    //todo err handling 
-  // await test()
+
 }
 
 load();
