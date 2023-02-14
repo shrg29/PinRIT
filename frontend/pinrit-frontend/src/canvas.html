@@ -54,24 +54,23 @@
     <div class="row">
       <div class="col s12 m5 z-depth-3">
         <div class="canvas-panel">
-          <div class="queued-div p-1">
-          <div id="nftData"></div>
-        </div>
+          <div data-target="modalNFT" class="modal-trigger" id="nftData"></div>
         </div>
       </div>
     </div>
 
+    <div class="modal" id="modalNFT">
+      <p id="info"></p>
+    </div>
+
     <button data-target="modal1" class="btn modal-trigger">Modal</button>
 
-    <div class="modal" id="modal1">
-    <div class="row">
+    <div class="row modal" id="modal1">
       <div class="col s12">
         <div class="card">
-          <div class="card-content white-text">
+          <div class="card-content">
             <div class="cont">
               <span class="card-title">Pin something to PinRIT</span>
-
-
               <div class="row header">
                 <div class="input-field col s6">
                   <input placeholder="NFT name" id="name" type="text" class="validate">
@@ -92,7 +91,6 @@
 
               <div class="row header">
                 <div class="input-div col s12">
-                  <!-- pozovi na input onChangeFile funkciju  -->
                   <input type="file" id="fileURL" class="file" multiple="multiple"
                     accept="image/jpeg, image/png, image/jpg, image/gif" />
                 </div>
@@ -107,7 +105,7 @@
                   <!-- pozovi uploadArtwork funkciju -->
                    <div id="waitMsg"></div>
                    <p id="msg-text"></p>
-                    <a class="waves-effect waves-light btn" id="buttonUpload">Upload artwork</a>
+                    <a class="btn" id="buttonUpload">Upload artwork</a>
                 </div>
               </div>
             </div>
@@ -116,7 +114,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 
   <!-- this is just for front -->
@@ -130,37 +128,31 @@
   <!-- <a class="waves-effect waves-light btn">button</a> -->
 
   <div class="footer">
-    <div class="m-2">
+    <div class="flex-center">
       <img src="assets-canvas/logo1.svg">
       <img src="assets-canvas/title.svg">
     </div>
-    <div class="p-3">
+    <div class="size">
       <a href="#" class="fa fa-instagram"></a>
       <a href="#" class="fa fa-twitter"></a>
       <a href="#" class="fa fa-snapchat-ghost"></a>
       <a href="#" class="fa fa-youtube"></a>
       
-    </div>
-    <div class=" p-3">
-    <h6>BC1.Moomins RIT Croatia</h6>
-    <h6>ISTE-501</h6>
-    <h6 class="m-2 text-center text-white text-capitalize p-2">Copyright &copy; 2023 PinRIT</h6>
   </div>
+
+    <h6 class="size">BC1.Moomins RIT Croatia</h6>
+    <h6 class="size">ISTE-501</h6>
+    <h6 class="size">Copyright &copy; 2023 PinRIT</h6>
+
   </div>
   
 
 
 
   <script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //   var elems = document.querySelectorAll('.modal');
-    //   var instances = M.Modal.init(elems, options);
-    // });
-
-    $(document).ready(function(){
-    $('.modal').modal();
-  });
-
+          $(document).ready(function(){
+                $('.modal').modal();
+              });
     </script>
 </body>
 

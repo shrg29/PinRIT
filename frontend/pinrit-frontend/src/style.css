@@ -28,6 +28,14 @@ body {
     
 }
 
+.flex-center {
+  display: flex;
+}
+
+.size {
+  font-size: small;
+}
+
 .metamask-button:hover{
   transform: rotate(360deg);
 
@@ -108,15 +116,18 @@ body {
     border-width: 2.5px;
 }
 
-.card {
-  border-style: solid;
-  background-color: #070916;
-  border-color: #5FA5FA;
-  border-radius: 5%;
-  width: 30em;
-  height: 30em;
-  border-width: 2.5px;
+.card-content {
+  background-color: #070916 !important;
+}
 
+.modal {
+  width: 30em !important;
+  height: 30em;
+  border-color: #5FA5FA;
+  background-color: #070916 !important;
+  border-style: solid;
+  border-radius: 5% !important;
+  border-width: 2.5px;
 }
 
 input {
@@ -137,27 +148,25 @@ textarea {
 }
 
 .btn {
-  border-style: solid;
-  border-radius: 1em;
-  background-color: #111535;
-  border-color: #04B6D4;
-  color: white;
-  border-width: 2.5px;
+  border-style: solid !important;
+  border-radius: 1em !important;
+  background-color: #111535 !important;
+  border-color: #04B6D4 !important;
+  color: white !important;
+  border-width: 2.5px !important;
 }
 
 .btn:hover {
-background-color: #575FA8;
+background-color: #575FA8 !important;
 }
 
 /* ovdje pocinje copy */
-  
   .header {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
     gap: 10px; 
-
   }
   
   .header h2 {
@@ -200,7 +209,6 @@ background-color: #575FA8;
   transition-duration: 0.5s;
   }
 
-
   .fa {
     padding: 13px;
     text-decoration: none;
@@ -208,14 +216,12 @@ background-color: #575FA8;
     margin: 0.1em;
     
   }
-  
   .fa:hover {
     text-decoration: none;
     color: white;
     opacity: 0.5;
    
 }
-
 
   /* Facebook */
 .fa-instagram {

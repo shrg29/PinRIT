@@ -198,7 +198,6 @@ async function uploadMetadataToIPFS() {
   const addButton = document.getElementById("buttonUpload");
   addButton.addEventListener("click", uploadArtwork);
 
-
   async function uploadArtwork(e) {
     e.preventDefault();
 
@@ -227,35 +226,63 @@ function updateFetched(isFetched){
     fetched = isFetched
 }
 
-//TODO get all NFT's
+//this actually gets all images of the NFTs
 async function getAllNFTs(){
-
     let listOfUrls = ""
+    //we are calling the contract method which returns the array of all nfts (info about owners, price and id)
     let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
-    
-       let newTransaction = array
-    
+    let newTransaction = array
+   
+    //go through everything from the array and based on the ID get the generated url
         return Promise.all(newTransaction.map(async i => {
-            console.log("NFT: "+ i)
            const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
    
           return tokenURI
         })).then(results => {
             listOfUrls = results
+           // console.log(listOfUrls)
             return results
-
         })
         })
 return transaction
 
 }
 
+//vraca cijeli info i stavlja ga u array
+async function getInfo(){
+    let listOfUrls = ""
+        //we are calling the contract method which returns the array of all nfts (info about owner, price and id)
+        let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
+            let newTransaction = array
+           
+            //go through everything from the array and based on the ID get info 
+                return Promise.all(newTransaction.map(async i => {
+                   const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call() 
+                   let meta = await axios.get(tokenURI);
+                    meta = meta.data;
 
-async function test() {
-
-    let test =  await contract.methods.getAllNFTs().call()
-    console.log("IM HEREEEEWEE" + test)
- }
+                    let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+                    let item = {
+                        tokenId: i.tokenID,
+                        price,
+                        seller: i.seller,
+                        owner: i.owner,
+                        image: meta.image,
+                        name: meta.name,
+                        description: meta.description,
+                    }
+                    console.log(item)
+                    return item;
+           
+                  return tokenURI
+                })).then(results => {
+                    listOfUrls = results
+                   // console.log(listOfUrls)
+                    return results
+                })
+                })
+        return transaction
+}
 
  //loads at page rendering
  async function load() {
@@ -264,20 +291,30 @@ async function test() {
     await loadWeb3();
     window.contract = await loadContract();
     await getAllAccounts();
+    await getAllNFTs();
+    //await getInfo();
+
 
     if(!fetched) {
         let listOfUrls = await getAllNFTs() // vraca sve urlove NFT-eva
-        console.log(listOfUrls)
-        
+        let info = await getInfo() //vraca dosl ovak cijeli info
+     //   console.log(listOfUrls)
+     //prodje kroz sve slike, fetcha ih i zaljepi na front
         const responses = await Promise.all(listOfUrls.map(url => fetch(url).then(res => res.json())))
-        
         const root = document.getElementById("nftData");
         for (const response of responses) {
+
             const img = document.createElement("img");
             img.src = response.image;
             root.appendChild(img);
         }
-    
+
+        //TODO fix this bitch
+       for (const resp of info) {
+        const el = document.getElementById("info");
+        let textNode = document.createTextNode(JSON.stringify(resp));
+        el.appendChild(textNode);
+    }
         updateFetched(true)
     }
 
