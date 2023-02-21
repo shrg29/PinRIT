@@ -8,6 +8,7 @@ let description = document.getElementById("description").value;
 let price = document.getElementById("price").value;
 let fileURL = ""
 let fetched = false
+let currentID = 0;
 
 //loading web3
 async function loadWeb3() {
@@ -220,16 +221,14 @@ buyButton.addEventListener('click', buyArtwork)
 async function buyArtwork(resp) {
     let data
     try {
+        let info = await getInfo()
         console.log(resp)
-        let info = await getInfo() //vraca dosl ovak cijeli info
+        console.log(resp.tokenId)
+        //vraca dosl ovak cijeli info
+        const accounts = await window.ethereum.request({method: 'eth_requestAccounts'}), account = accounts[0];
 
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const account = accounts[0];
-const price = ethers.utils.parseUnits(resp.price, 'ether')
-
-
-        console.log(price)
-            let transaction = await window.contract.methods.buyNFT(resp.tokenId).send({ from: account, gas: 3000000, value: price }, function (err, res) { })
+        console.log(currentID)
+            let transaction = await window.contract.methods.buyNFT(currentID).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.001), 'ether')  }, function (err, res) { })
             await transaction.wait()
         } catch (error) {
             console.log("Buy error ", error)
@@ -342,6 +341,8 @@ function updateFetched(isFetched) {
                 img.src = response.image;
                 img.id = response.image;
                 img.addEventListener('click', function handleClick(event) {
+                    currentID = response.tokenId
+                    console.log(currentID)
                     appendInfo(response)
                 });
                 root.appendChild(img);
