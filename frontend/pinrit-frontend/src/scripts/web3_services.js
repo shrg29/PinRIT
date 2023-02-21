@@ -1,13 +1,12 @@
 
 import myJson from '../../../../Marketplace.json' assert {type: 'json'};
 
-let contract = "0xE8b3931Ac0C191df173111B5798A57Cff6bDc449"
+let contract = "0x77f711C96FeBd4e82Fb61109b47d3B0631CD4823"
 
 let name = document.getElementById("name").value;
 let description = document.getElementById("description").value;
 let price = document.getElementById("price").value;
 let fileURL = ""
-let nftData
 let fetched = false
 
 //loading web3
@@ -23,7 +22,7 @@ async function loadContract() {
     return (contract = await new window.web3.eth.Contract(myJson.abi, myJson.address));
 }
 
-
+//connecting to Metamask
 export async function connectMetamask() {
     console.log("konektiran sam ")
     // Modern dapp browsers...
@@ -57,10 +56,6 @@ async function getAllAccounts() {
     });
 }
 
-function getAccount() {
-    return localStorage.getItem("wallet-address");
-}
-
 async function printAccount() {
     await window.ethereum.enable();
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -78,6 +73,7 @@ function uploadJSONToIPFS(JSONBody) {
     //making axios POST request to Pinata ⬇️
     return axios.post(url, JSONBody, {
         headers: {
+            "Access-Control-Allow-Origin": "*",
             pinata_api_key: "697b58916befdfdf20bb",
             pinata_secret_api_key: "a94852cfef4ce49665f7eeae6574311e920141117e664381fac1ffbe2b627a70",
         }
@@ -116,6 +112,7 @@ function uploadFileToIPFS(file) {
         .post(url, data, {
             maxBodyLength: 'Infinity',
             headers: {
+                "Access-Control-Allow-Origin": "*",
                 'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
                 pinata_api_key: '697b58916befdfdf20bb',
                 pinata_secret_api_key: 'a94852cfef4ce49665f7eeae6574311e920141117e664381fac1ffbe2b627a70',
@@ -218,30 +215,29 @@ async function uploadArtwork(e) {
     }
 }
 
-function updateImages(items) {
-    nftData = items
-}
-
 function updateFetched(isFetched) {
     fetched = isFetched
 }
 
 //this actually gets all images of the NFTs
 async function getAllNFTs() {
+    
     let listOfUrls = ""
     //we are calling the contract method which returns the array of all nfts (info about owners, price and id)
     let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
         let newTransaction = array
-
+       // console.log("info s ugovora " + array)
+        
         //go through everything from the array and based on the ID get the generated url
         return Promise.all(newTransaction.map(async i => {
             const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
-
+            //console.log(tokenURI)
             return tokenURI
         })).then(results => {
             listOfUrls = results
-            // console.log(listOfUrls)
+           // console.log("cijeli array " + results)
             return results
+            
         })
     })
     return transaction
@@ -258,7 +254,11 @@ async function getInfo() {
         //go through everything from the array and based on the ID get info 
         return Promise.all(newTransaction.map(async i => {
             const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
-            let meta = await axios.get(tokenURI);
+            let meta = await axios.get(tokenURI, {
+                headers: {
+                    'Accept': 'text/plain'
+                }
+            });
             meta = meta.data;
 
             let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
@@ -271,7 +271,7 @@ async function getInfo() {
                 name: meta.name,
                 description: meta.description,
             }
-            console.log(item)
+            //console.log(item)
             return item;
 
             return tokenURI
@@ -285,14 +285,23 @@ async function getInfo() {
 }
 
 function appendInfo(resp) {
+    console.log(resp)
     const el = document.getElementById("info");
     let textNode = document.createTextNode(JSON.stringify(resp));
     el.innerHTML = 
-    `<p>Name of NFT: ${resp.name}</p>
-    <img src= ${resp.image} width=100 height=100/>
+    `
+    <div class="info-form">
+    <div class="circle-el">
+    <img class="circle" src= ${resp.image} width=115 height=115/>
+    </div>
+    <h6>${resp.name}</h6>
+    </div>
+    <div class= "info-text"> 
+    <p>Description: ${resp.description}</p>
+    <p>Current owner: ${resp.seller}</p>
     <p> Price: ${resp.price} ETH</p>
-    <p>Owner: ${resp.owner}</p>
-    <p>Seller: ${resp.seller}</p>`;
+    </div>
+    `;
 }
 
 //loads at page rendering
@@ -302,24 +311,18 @@ async function load() {
     await loadWeb3();
     window.contract = await loadContract();
     await getAllAccounts();
-    await getAllNFTs();
-    //await getInfo();
-
+    //await getAllNFTs();
+    await getInfo();
 
     if (!fetched) {
-        let listOfUrls = await getAllNFTs() // vraca sve urlove NFT-eva
         let info = await getInfo() //vraca dosl ovak cijeli info
-        //   console.log(listOfUrls)
-        //prodje kroz sve slike, fetcha ih i zaljepi na front
-        const responses = await Promise.all(listOfUrls.map(url => fetch(url).then(res => res.json())))
         const root = document.getElementById("nftData");
-        for (const response of responses) {
-
+        for (const response of info) {
             const img = document.createElement("img");
             img.src = response.image;
             img.id = response.image;
             img.addEventListener('click', function handleClick(event) {
-                appendInfo(response)
+            appendInfo(response)
             });
             root.appendChild(img);
         }

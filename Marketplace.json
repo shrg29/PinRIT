@@ -1,4 +1,4 @@
-{"address":"0xE8b3931Ac0C191df173111B5798A57Cff6bDc449",  "abi": [
+{"address":"0x77f711C96FeBd4e82Fb61109b47d3B0631CD4823",  "abi": [
     {
       "inputs": [],
       "stateMutability": "nonpayable",
@@ -233,6 +233,46 @@
           "internalType": "uint256",
           "name": "",
           "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMyNFTs",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "tokenID",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address payable",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address payable",
+              "name": "seller",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "currentlyListed",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct PinRIT.MintedNFT[]",
+          "name": "",
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",

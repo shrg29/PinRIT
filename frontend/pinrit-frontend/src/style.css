@@ -30,10 +30,50 @@ body {
 
 .flex-center {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-el {
+  display: block;
+  width: 135px !important;
+  height: 135px !important;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #5F5BF5;
+  border-width: 3px;
+  text-align:center;
+}
+
+.circle-el img{
+  margin-top: 6.7px;
+}
+
+.info-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .size {
   font-size: small;
+}
+
+.buy-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em;
+  font-size: smaller;
+  color: #93c5fd;
 }
 
 .metamask-button:hover{
@@ -121,7 +161,7 @@ body {
 }
 
 .modal {
-  width: 30em !important;
+  width: 28em !important;
   height: 30em;
   border-color: #5FA5FA;
   background-color: #070916 !important;
@@ -145,6 +185,10 @@ textarea {
   border-color: #04B6D4;
   border-width: 2.5px;
   color: white;
+}
+
+.custom-btn-width {
+  width: 10em;
 }
 
 .btn {

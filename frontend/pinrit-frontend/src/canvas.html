@@ -7,32 +7,20 @@
   <title>PinRIT</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Place favicon.ico in the root directory -->
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="style.css">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" -->
-  <!-- crossorigin="anonymous"></script> -->
-
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-
   <script type="module" src="scripts/web3_services.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
@@ -60,7 +48,13 @@
     </div>
 
     <div class="modal" id="modalNFT">
+      <div class="buy-buttons">
       <p id="info"></p>
+      <div class= ""> 
+        <a class="btn custom-btn-width">Cancel</a>
+        <a class="btn custom-btn-width">Buy</a>
+      </div>
+    </div>
     </div>
 
     <button data-target="modal1" class="btn modal-trigger">Upload Artwork</button>
@@ -115,18 +109,6 @@
     </div>
   </div>
 
-
-
-  <!-- this is just for front -->
-  <form id="queued-form">
-    <div class="header">
-      <!-- <button type="submit"> Upload</button> -->
-    </div>
-  </form>
-
-
-  <!-- <a class="waves-effect waves-light btn">button</a> -->
-
   <div class="footer">
     <div class="flex-center">
       <img src="assets-canvas/logo1.svg">
@@ -145,10 +127,6 @@
     <h6 class="size">Copyright &copy; 2023 PinRIT</h6>
 
   </div>
-
-
-
-
   <script>
     $(document).ready(function () {
       $('.modal').modal();

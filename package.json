@@ -42,6 +42,7 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.0",
     "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "fs": "*",
     "js-ipfs": "^0.0.301",
