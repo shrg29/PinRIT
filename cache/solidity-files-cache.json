@@ -74,8 +74,8 @@
       ]
     },
     "/Users/sarahhh/Desktop/pin/PinRIT/contracts/PinRIT.sol": {
-      "lastModificationDate": 1676122693563,
-      "contentHash": "65801244db56c6bf432479e883e14be6",
+      "lastModificationDate": 1677012778060,
+      "contentHash": "51f93e3bbb1e28f64b4a6f69f62e63c2",
       "sourceName": "contracts/PinRIT.sol",
       "solcConfig": {
         "version": "0.8.4",

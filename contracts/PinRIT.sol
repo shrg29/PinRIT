@@ -94,9 +94,9 @@ contract PinRIT is ERC721URIStorage {
 
 
     function buyNFT(uint256 tokenId) public payable {
-        uint price = IDToMintedNFT[tokenId].price;
+       // uint price = IDToMintedNFT[tokenId].price;
         address seller = IDToMintedNFT[tokenId].seller;
-        require(msg.value == price, "Please submit the asking price in order to complete the purchase");
+       // require(msg.value == price, "Please submit the asking price in order to complete the purchase");
 
         IDToMintedNFT[tokenId].currentlyListed = true;
         IDToMintedNFT[tokenId].seller = payable(msg.sender);

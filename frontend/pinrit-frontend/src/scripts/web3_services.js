@@ -1,7 +1,7 @@
 
 import myJson from '../../../../Marketplace.json' assert {type: 'json'};
 
-let contract = "0x77f711C96FeBd4e82Fb61109b47d3B0631CD4823"
+let contract = "0xE87d9B72e7c3d26dA6ca684F2c8747E0c4a18869"
 
 let name = document.getElementById("name").value;
 let description = document.getElementById("description").value;
@@ -9,6 +9,7 @@ let price = document.getElementById("price").value;
 let fileURL = ""
 let fetched = false
 let currentID = 0;
+let currentPrice = 0;
 
 //loading web3
 async function loadWeb3() {
@@ -206,7 +207,7 @@ async function uploadArtwork(e) {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const account = accounts[0];
 
-        let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.001), 'ether') }, function (err, res) { })
+        let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.00001), 'ether') }, function (err, res) { })
         await transaction.wait()
     }
     catch (e) {
@@ -219,7 +220,7 @@ const buyButton = document.getElementById('buyButton')
 buyButton.addEventListener('click', buyArtwork)
 
 async function buyArtwork(resp) {
-    let data
+
     try {
         let info = await getInfo()
         console.log(resp)
@@ -228,7 +229,11 @@ async function buyArtwork(resp) {
         const accounts = await window.ethereum.request({method: 'eth_requestAccounts'}), account = accounts[0];
 
         console.log(currentID)
-            let transaction = await window.contract.methods.buyNFT(currentID).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.001), 'ether')  }, function (err, res) { })
+        console.log(currentPrice)
+
+        let price = Number(currentPrice)
+
+            let transaction = await window.contract.methods.buyNFT(currentID).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.001), 'ether') }, function (err, res) { })
             await transaction.wait()
         } catch (error) {
             console.log("Buy error ", error)
@@ -342,6 +347,7 @@ function updateFetched(isFetched) {
                 img.id = response.image;
                 img.addEventListener('click', function handleClick(event) {
                     currentID = response.tokenId
+                    currentPrice = response.price
                     console.log(currentID)
                     appendInfo(response)
                 });
