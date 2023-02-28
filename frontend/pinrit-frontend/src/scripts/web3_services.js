@@ -11,6 +11,11 @@ let fetched = false
 let currentID = 0;
 let currentPrice = 0;
 
+//new code Ihor
+let errorName = document.getElementById("name").nextElementSibling;
+let errorPrice = document.getElementById("price").nextElementSibling;
+let errorDescription = document.getElementById("description").nextElementSibling;
+
 //loading web3
 async function loadWeb3() {
     if (window.ethereum) {
@@ -159,9 +164,33 @@ async function uploadMetadataToIPFS() {
     name = document.getElementById("name").value;
     description = document.getElementById("description").value;
     price = document.getElementById("price").value;
+
+    //new code Ihor
+    //cleans error msgs
+    errorName.innerHTML = "";
+    errorPrice.innerHTML = "";
+    errorDescription.innerHTML = "";
+
+    //print error msg
+    if (name.length == 0) {
+        errorName.innerHTML += "- NFT Name is required.<br/>";
+    }else if (String(name).trim().length <= 2) {
+        errorName.innerHTML += "- NFT name has to have at least three characters.<br/>";
+    }
+    if (description.length == 0) {
+        errorDescription.innerHTML += "- Description is required.<br/>";
+    }else if (String(description).trim().length <= 4) {
+        errorDescription.innerHTML += "- Description has to have at least five characters.<br/>";
+    }
+    if (price.length == 0) {
+        errorPrice.innerHTML += "- Price should be entered.<br/>";
+    } else if (price < 0) {
+        errorPrice.innerHTML += "- Price should be a positive value.<br/>";
+    }
     //Make sure that none of the fields are empty
     if (!name || !description || !price || !fileURL)
         return;
+    //new code Ihor
 
     const nftJSON = {
         name, description, price, image: fileURL
@@ -207,13 +236,12 @@ async function uploadArtwork(e) {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const account = accounts[0];
 
-        let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.00001), 'ether') }, function (err, res) { })
+        let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.001), 'ether') }, function (err, res) { })
         await transaction.wait()
     }
     catch (e) {
         alert("Succesfully uploaded artwork!")
-        load();
-        console.log("Upload error" + e)
+        window.location.reload();
     }
 }
 const buyButton = document.getElementById('buyButton')
@@ -233,7 +261,7 @@ async function buyArtwork(resp) {
 
         let price = Number(currentPrice)
 
-            let transaction = await window.contract.methods.buyNFT(currentID).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.001), 'ether') }, function (err, res) { })
+            let transaction = await window.contract.methods.buyNFT(currentID).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.000001), 'ether') }, function (err, res) { })
             await transaction.wait()
         } catch (error) {
             console.log("Buy error ", error)

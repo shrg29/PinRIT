@@ -6,6 +6,19 @@ body {
     margin: none;
 }
 
+#upl {
+  margin-top: 2em;
+}
+
+.card-panel {
+  background-color: #0B0D21 !important;
+  height: 100vh;
+}
+
+footer {
+  background-color: #080620 !important;
+}
+
   .title {
     display: flex;
     flex-direction: row;
@@ -14,8 +27,6 @@ body {
   .title-canvas {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    margin-left: auto;
   }
 
 .metamask-button {
@@ -114,25 +125,14 @@ body {
 .canvas-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
     padding: 2em;
-    justify-content: space-evenly
+   
 }
+
 
 #test_text {
     text-align: left;
     padding-left: 2em;
-}
-
-.footer {
-    background-color: #080620 !important;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
 }
 
 .cl {
@@ -146,14 +146,27 @@ body {
   justify-content: center;
 }
 
+
+
+
 .canvas-panel {
     width: 40em;
     height: 35em;
-    background-color: #171B42;
-    border-style: solid;
-    border-color: teal;
-    border-radius: 5%;
-    border-width: 2.5px;
+    border-width: 4px;  background: linear-gradient(#171B42, #171B42) padding-box,
+    linear-gradient(to right, #20A2FF,#22DBF7, #A4FFCB) border-box;
+    border-radius: 50em;
+    border: 4px solid transparent;
+    border-radius: 3%;
+    border: 2.5px solid transparent;
+    /* box-shadow: 0px 0px 5px #fff; */
+}
+
+.help-canvas {
+  padding: 2em;
+  width: 100%;
+  height: 100%;
+  background: #171B42;
+
 }
 
 .card-content {

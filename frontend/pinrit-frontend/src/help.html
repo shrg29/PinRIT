@@ -41,82 +41,19 @@
     </div>
   </div>
 
-
-  <!-- canvas card panel -->
-  <div class="row ">
-    <div class="col s12">
-      <div class="card-panel">
-         <div class="canvas-panel shadow-lg">
-          <div data-target="modalNFT" class="modal-trigger" id="nftData"></div>
-         </div>  
-         <button id="upl" data-target="modal1" class="btn modal-trigger">Upload Artwork</button>
-      </div>
-    </div>
-  </div>
-
-    <div class="modal" id="modalNFT">
-      <div class="buy-buttons">
-        <p id="info"></p>
-        <div class="">
-          <a class="btn custom-btn-width modal-close waves-effect waves-purple">Cancel</a>
-          <a class="btn custom-btn-width" id="buyButton">Buy</a>
-        </div>
-      </div>
-    </div>
-
-   <!-- remove style -->
-   <div class="row modal" id="modal1">
-    <div class="col s12">
-      <div class="card">
-        <div class="card-content">
-          <div class="cont">
-            <span class="card-title">Pin something to PinRIT</span>
-            <div class="row header">
-              <div class="input-field col s6">
-                <input placeholder="NFT name" id="name" type="text" class="validate">
-                <div class="error-msg"></div>
-                <!-- <label for="name"></label> -->
-              </div>
-              <div class="input-field col s6">
-                <input placeholder="Price in ETH" id="price" type="text" class="validate">
-                <div class="error-msg"></div>
-                <!-- <label for="price"></label> -->
-              </div>
-            </div>
-
-            <div class="row header">
-              <div class="input-field col s12">
-                <textarea placeholder="NFT description" id="description" class="materialize-textarea"></textarea>
-                <div class="error-msg"></div>
-                <!-- <label for="textarea1"></label> -->
-              </div>
-            </div>
-
-            <div class="row header">
-              <div class="input-div col s12">
-                <input type="file" id="fileURL" class="file" multiple="multiple"
-                  accept="image/jpeg, image/png, image/jpg, image/gif" />
-              </div>
-            </div>
-
-            <div class="row">
-              <p id="uploadMessage"></p>
-            </div>
-
-            <div class="row">
-              <div class="col s12 ">
-                <!-- pozovi uploadArtwork funkciju -->
-                <div id="waitMsg"></div>
-                <p id="msg-text"></p>
-                <a class="btn" id="buttonUpload">Upload artwork</a>
-              </div>
-            </div>
+    <!-- canvas card panel -->
+    <div class="row ">
+        <div class="col s12">
+          <div class="card-panel">
+             <div class="help-canvas shadow-lg">
+             </div>  
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+
+
+
+
 
 
   <footer class="page-footer">
