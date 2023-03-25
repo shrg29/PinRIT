@@ -1,0 +1,27 @@
+.metamask-button:hover{
+    transform: rotate(360deg);
+
+  }
+  
+  .mtm-height {
+    height: 7em;
+  }
+
+  .metamask-button {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+     transition: transform .7s ease-in-out;
+     margin-left:10px;
+      
+  }
+
+  .metamask-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}

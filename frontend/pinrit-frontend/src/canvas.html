@@ -14,7 +14,8 @@
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
   
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../src/styles/canvas.css">
+    <link rel="stylesheet" href="../src/styles/style.css">
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
@@ -25,6 +26,7 @@
   
 <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script type="module" src="scripts/web3_services.js"></script>
+  <script type="module" src="scripts/canvas.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
@@ -43,7 +45,7 @@
 
 
   <!-- canvas card panel -->
-  <div class="row ">
+  <div class="row flex-center">
     <div class="col s12">
       <div class="card-panel">
          <div class="canvas-panel shadow-lg">
@@ -68,7 +70,7 @@
    <div class="row modal" id="modal1">
     <div class="col s12">
       <div class="card">
-        <div class="card-content">
+        <div class="card-content bck">
           <div class="cont">
             <span class="card-title">Pin something to PinRIT</span>
             <div class="row header">
@@ -119,36 +121,30 @@
 </div>
 
 
-  <footer class="page-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <div class="flex-center">
-            <img src="assets-canvas/logo1.svg">
-            <img src="assets-canvas/title.svg">
-          </div>
-          <p class="grey-text text-lighten-4">BC1.Moomins RIT Croatia <br> ISTE-501</p>
+<footer class="page-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <div class="flex-center">
+          <img src="assets-canvas/logo1.svg">
+          <img src="assets-canvas/title.svg">
         </div>
-        <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">Follow us</h5>
-          <ul>
-            <li><a class="fa fa-instagram" href="#!"></a> link 1</li>
-            <li><a class="grey-text text-lighten-3 fa fa-twitter" href="#!"></a> link 2</li>
-            <li><a class="grey-text text-lighten-3 fa fa-snapchat-ghost" href="#!"></a> link 3</li>
-            <li><a class="grey-text text-lighten-3 fa fa-youtube" href="#!"></a> link 4</li>
-          </ul>
-        </div>
+        <p class="grey-text text-lighten-4">BC1.Moomins RIT Croatia <br> ISTE-501</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Follow us</h5>
+        <ul>
+          <li><a class="fa fa-instagram" href="#!"></a> link 1</li>
+          <li><a class="grey-text text-lighten-3 fa fa-twitter" href="#!"></a> link 2</li>
+          <li><a class="grey-text text-lighten-3 fa fa-snapchat-ghost" href="#!"></a> link 3</li>
+          <li><a class="grey-text text-lighten-3 fa fa-youtube" href="#!"></a> link 4</li>
+        </ul>
       </div>
     </div>
-    <div class="footer-copyright">
-      <div class="container">
       © 2023 PinRIT
       <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-      </div>
-    </div>
-  </footer>
-
-
+  </div>
+</footer>
 
   <script>
     $(document).ready(function () {
