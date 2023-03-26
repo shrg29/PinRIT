@@ -1,79 +1,106 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>PinRIT</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css"
+    />
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../src/styles/profile.css" />
+    <link rel="stylesheet" href="../src/styles/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script
+      src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+      type="application/javascript"
+    ></script>
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script type="module" src="scripts/web3_services.js"></script>
+    <script type="module" src="scripts/profile.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>PinRIT</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
-   <!-- CSS here -->
-  <link rel="stylesheet" href="../src/styles/profile.css">
-  <link rel="stylesheet" href="../src/styles/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <!-- Compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-<script type="module" src="scripts/web3_services.js"></script>
-<script type="module" src="scripts/profile.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <body>
+    <div class="title-canvas">
+      <img src="assets/logo1.svg" />
+      <img src="assets/title.svg" />
 
-</head>
-
-<body>
-  <div class="title-canvas">
-    <img src="assets/logo1.svg">
-    <img src="assets/title.svg">
-
-    <div class="help">
-      <h3 class="address" id="connected-account-address"> You're currently connected with this address: <br><br></h3>
-      <img src="assets/help.png"> 
-    </div>
-  </div>
-
-  <div class="row container">
-    <div class="col s12 blue">Your NFTs</div>
-    <div class="col s12">
-      <div class="card-panel flex-center">
-        <div id="nftData"></div>
+      <div class="help">
+        <h3 class="address" id="connected-account-address">
+          You're currently connected with this address: <br /><br />
+        </h3>
+        <img src="assets/help.png" />
       </div>
     </div>
-  </div>
 
-  <footer class="page-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <div class="flex-center">
-            <img src="assets/logo1.svg">
-            <img src="assets/title.svg">
+    <div class="row container">
+      <div class="col s12 blue">Your NFTs</div>
+      <div class="col s12">
+        <div class="card-panel flex-center">
+          <div id="nftData"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <div class="flex-center">
+              <img src="assets/logo1.svg" />
+              <img src="assets/title.svg" />
+            </div>
+            <p class="grey-text text-lighten-4">
+              BC1.Moomins RIT Croatia <br />
+              ISTE-501
+            </p>
           </div>
-          <p class="grey-text text-lighten-4">BC1.Moomins RIT Croatia <br> ISTE-501</p>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Follow us</h5>
+            <ul>
+              <li><a class="fa fa-instagram" href="#!"></a> link 1</li>
+              <li>
+                <a class="grey-text text-lighten-3 fa fa-twitter" href="#!"></a>
+                link 2
+              </li>
+              <li>
+                <a
+                  class="grey-text text-lighten-3 fa fa-snapchat-ghost"
+                  href="#!"
+                ></a>
+                link 3
+              </li>
+              <li>
+                <a class="grey-text text-lighten-3 fa fa-youtube" href="#!"></a>
+                link 4
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">Follow us</h5>
-          <ul>
-            <li><a class="fa fa-instagram" href="#!"></a> link 1</li>
-            <li><a class="grey-text text-lighten-3 fa fa-twitter" href="#!"></a> link 2</li>
-            <li><a class="grey-text text-lighten-3 fa fa-snapchat-ghost" href="#!"></a> link 3</li>
-            <li><a class="grey-text text-lighten-3 fa fa-youtube" href="#!"></a> link 4</li>
-          </ul>
-        </div>
-      </div>
         © 2023 PinRIT
         <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-    </div>
-  </footer>
-
-</body>
-
+      </div>
+    </footer>
+  </body>
 </html>
