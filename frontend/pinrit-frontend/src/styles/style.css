@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa+One&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
     background-color: #0B0D21;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -99,4 +105,49 @@ font-size: small;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.nft_header_image {
+  width: 100%;
+  height: 100%;
+}
+
+.svg_image {
+  width: 100%;
+  height: 100%;
+}
+
+#header {
+  height: 100vh;
+}
+
+.header-container {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10%;
+}
+
+.text-block {
+  font-size: 16px;
+  color: white;
+}
+
+.font {
+  font-family: 'Changa One', cursive;
+}
+
+.floating {
+  position: relative;
+  animation-name: float;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(0, 20px); }
+  100% { transform: translate(0, 0); }
 }
