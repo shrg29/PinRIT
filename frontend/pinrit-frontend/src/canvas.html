@@ -55,11 +55,16 @@
       </div>
     </div>
   </div>
-  
+
+  <div class="carousel">
+    <a class="carousel-item" href="#canvas"><img src="../src/assets/nft1.png"></a>
+    <a class="carousel-item" href="#canvas"><img src="../src/assets/nft2.png"></a>
+    <a class="carousel-item" href="#three!"><img src="../src/assets/nft3.png"></a>
+  </div>
 
   <!-- canvas card panel --> 
   <div id="canvas" class="row flex-center">
-    <div class="col s12">
+    <div class="col s12 offset-s2">
       <div class="card-panel">
          <div class="canvas-panel shadow-lg">
           <div data-target="modalNFT" class="modal-trigger" id="nftData"></div>
@@ -163,6 +168,10 @@
     $(document).ready(function () {
       $('.modal').modal();
     });
+
+    $(document).ready(function(){
+    $('.carousel').carousel();
+  }); 
 
   </script>
 </body>

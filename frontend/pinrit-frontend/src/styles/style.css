@@ -118,7 +118,7 @@ font-size: small;
 }
 
 #header {
-  height: 100vh;
+  height: 80vh;
 }
 
 .header-container {
@@ -150,4 +150,17 @@ font-size: small;
   0% { transform: translate(0, 0); }
   50% { transform: translate(0, 20px); }
   100% { transform: translate(0, 0); }
+}
+
+.carousel {
+  height: 100vh !important;
+}
+
+.carousel .carousel-item {
+  width: 50% !important; 
+  margin-top: -10%;
+}
+
+.carousel-item :hover {
+  filter: brightness(50%);
 }
