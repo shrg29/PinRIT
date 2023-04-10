@@ -1,6 +1,55 @@
-#nftData img{
-    height: 200px;
-    width: 200px;
-    border-radius: 13px;
-    margin: 0.1em;
+#myNFTs img{
+    height: 150px;
+    width: 150px;
+    border-style: solid;
+    border-radius: 10px !important;
+    border-color: #5FA5FA;
+    margin-top: 1em;
+    margin-bottom: 2em !important;
   }
+
+  .card-panel {
+    background-color: #0B0D21 !important;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10em !important;
+    position: relative;
+
+  }
+
+  .info-text {
+    color: #93c5fd;
+    font-size: large;
+  }
+
+  .price {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .card {
+    height: 300px;
+    width: 220px;
+    background-color: #171B42 !important;
+    border-style: solid;
+    border-radius: 5% !important;
+    border-width: 2.5px;
+    border-color: #7c4dff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2em !important;
+    
+  }
+
+  .container {
+    padding-top: 10em !important;
+  }
+
+  .container-footer {
+    margin-top: 2em !important;
+  }
+

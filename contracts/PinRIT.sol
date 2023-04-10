@@ -12,7 +12,7 @@ contract PinRIT is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _nftsSold;
     Counters.Counter private _tokenIDs;
-    address payable contractOwner; 
+    address payable owner; 
     uint256 listPrice = 0.001 ether;
 
     struct MintedNFT {
@@ -34,7 +34,7 @@ contract PinRIT is ERC721URIStorage {
      mapping(uint256 => MintedNFT) private IDToMintedNFT;
 
     constructor() ERC721("PinRIT", "NFT") {
-        contractOwner = payable(msg.sender); 
+        owner = payable(msg.sender); 
     }
 
     function mint(string memory tokenURI, uint256 price) public payable returns (uint) {
@@ -103,7 +103,7 @@ contract PinRIT is ERC721URIStorage {
         _nftsSold.increment();
         _transfer(address(this), msg.sender, tokenId);
         approve(address(this), tokenId);
-        payable(contractOwner).transfer(listPrice);
+        payable(owner).transfer(listPrice);
         payable(seller).transfer(msg.value);
     }
 

@@ -1,6 +1,8 @@
 import myJson from '../../../../Marketplace.json' assert {type: 'json'};
 
-let contract = "0xE87d9B72e7c3d26dA6ca684F2c8747E0c4a18869"
+//let previous = "0xE87d9B72e7c3d26dA6ca684F2c8747E0c4a18869"
+// let contract = "0xBA7c5F06EaD3Ad1c3B3B85Cc98DFcdaf51Af49B3"
+let contract = "0xdf898fbc4b3cBfc2CD08C4BB577D55Ec7DA24f1c"
 
 let name = document.getElementById("name").value;
 let description = document.getElementById("description").value;
@@ -309,6 +311,9 @@ function updateFetched(isFetched) {
     </div>
     `;
     }
+
+
+    
 
     //loads at page rendering
     async function load() {

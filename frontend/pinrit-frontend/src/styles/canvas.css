@@ -1,11 +1,20 @@
 
+
 #upl {
   margin-top: 2em;
 }
 
 .card-panel {
-  background-color: #0B0D21 !important;
-  height: 100vh;
+  background-color: #0B0D21!important;
+  width: 65em;
+  height: 55em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 0% !important;
+  border: none !important;
+  margin-bottom: 10em !important;
 }
 
 .flex-center {
@@ -34,6 +43,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 2em;
 }
 
 .size {
@@ -54,14 +64,10 @@
   padding: 1.5em;
   font-size: smaller;
   color: #93c5fd;
+  margin: 0.5em;
 }
 
-.canvas-container {
-    display: flex;
-    flex-direction: row;
-    padding: 2em;
-   
-}
+
 
 .cl {
     color: white;
@@ -74,14 +80,14 @@
   justify-content: center;
 }
 
+
 .canvas-panel {
-    width: 61em;
-    height: 35em;
+    width: 65em;
+    height: 45em;
     border-width: 4px;  background: linear-gradient(#171B42, #171B42) padding-box,
     linear-gradient(to right, #20A2FF,#22DBF7, #A4FFCB) border-box;
-    border-radius: 50em;
+    border-radius: 33px;
     border: 4px solid transparent;
-    border-radius: 3%;
     border: 2.5px solid transparent;
 }
 

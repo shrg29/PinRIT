@@ -27,28 +27,46 @@
 <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script type="module" src="scripts/web3_services.js"></script>
   <script type="module" src="scripts/canvas.js"></script>
+  <script type="text" src="styles/canvas.scss"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
 
+  <canvas id="canvas"></canvas>
 
-  <div class="title-canvas">
-    <img src="assets/logo1.svg">
-    <img src="assets/title.svg">
-
-    <div class="help">
-      <h3 class="address" id="connected-account-address"> You're currently connected with this address: <br><br></h3>
-      <img src="assets/help.png"> 
+    <div class="nav-container">
+      <div class="navigation">
+        <nav>
+          <ul class="nav-type">
+            <li><a href="canvas.html" class="active nav-text">Home</a></li>
+            <li><a href="profile.html"class="active1 nav-text">Profile</a></li>
+            <li><a href="help.html" class="active2 nav-text">Support</a></li>
+            <div class="line"></div>
+          </ul>
+        </nav>
+      </div>
     </div>
-  </div>
+
+
+
+   
+    <!-- <h3 class="address" id="connected-account-address"> You're currently connected with this address: <br><br></h3>
+  <div class="meta">
+    <img class="mtm-height " src="assets/metamask.svg" />
+  </div> -->
+
+    
+
+      <!-- <h3 class="address" id="connected-account-address"> You're currently connected with this address:  </h3> -->
+
 
   <div id="header">
     <div class="header-container">
       <div class="text-block">
         <h1>Welcome to PinRIT!</h1>
-        <p>Add your own artwork to the canvas and buy artwork from other artists.</p>
-        <a href="#canvas"><button class="btn modal-trigger">Try it out</button></a>
+        <p>Add your own artwork to the canvas and buy artwork from other artists.Add your own artwork to the canvas and buy artwork from other artists.Add your own artwork to the canvas and buy artwork from other artistsAdd your own artwork to the canvas and buy artwork from other artists..</p>
+        <a href="#canvas"><button class="btn modal-trigger try-button">Try it out</button></a>
       </div>
       <div class="nft_header_image floating">
         <img class="svg_image" src="../src/assets/nft-image.svg">
@@ -63,13 +81,13 @@
   </div>
 
   <!-- canvas card panel --> 
-  <div id="canvas" class="row flex-center">
+  <div id="canvas" class="row">
     <div class="col s12 offset-s2">
       <div class="card-panel">
          <div class="canvas-panel shadow-lg">
           <div data-target="modalNFT" class="modal-trigger" id="nftData"></div>
          </div>  
-         <button id="upl" data-target="modal1" class="btn modal-trigger">Upload Artwork</button>
+         <button id="upl" data-target="modal1" class="btn modal-trigger try-button">Upload Artwork</button>
       </div>
     </div>
   </div>
@@ -139,28 +157,28 @@
 </div>
 
 
-<footer class="page-footer">
+<footer class="page-footer center-align">
   <div class="container">
-    <div class="row">
-      <div class="col l6 s12">
+    <div class="row m2">
+      <div class="col s12">
         <div class="flex-center">
           <img src="assets/logo1.svg">
           <img src="assets/title.svg">
         </div>
-        <p class="grey-text text-lighten-4">BC1.Moomins RIT Croatia <br> ISTE-501</p>
       </div>
-      <div class="col l4 offset-l2 s12">
-        <h5 class="white-text">Follow us</h5>
-        <ul>
-          <li><a class="fa fa-instagram" href="#!"></a> link 1</li>
-          <li><a class="grey-text text-lighten-3 fa fa-twitter" href="#!"></a> link 2</li>
-          <li><a class="grey-text text-lighten-3 fa fa-snapchat-ghost" href="#!"></a> link 3</li>
-          <li><a class="grey-text text-lighten-3 fa fa-youtube" href="#!"></a> link 4</li>
+      <div class="col s12">
+        <ul class="flex-center">
+          <li><a class="fa fa-instagram" href="#!"></a></li>
+          <li><a class="grey-text text-lighten-3 fa fa-twitter" href="#!"></a></li>
+          <li><a class="grey-text text-lighten-3 fa fa-snapchat-ghost" href="#!"></a></li>
+          <li><a class="grey-text text-lighten-3 fa fa-youtube" href="#!"></a></li>
         </ul>
       </div>
+      <div class="col s12">
+        <p class="grey-text text-lighten-4 m2">BC1.Moomins RIT Croatia <br> ISTE-501</p>
+      </div>
     </div>
-      © 2023 PinRIT
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+    <p>copyright @2022 PinRIT. All rights reserved</p>
   </div>
 </footer>
 
@@ -172,6 +190,73 @@
     $(document).ready(function(){
     $('.carousel').carousel();
   }); 
+
+
+  //function section in Javascript and Jquery...
+function myData() {
+  retrun;
+}
+
+function show() {
+  document.getElementById('anotherFunction').classList.toggle('Active');
+}
+
+// Set up canvas
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+// Set canvas size
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Geometry shape settings
+const numShapes = 35;
+const shapes = [];
+
+// Create geometry shapes
+for (let i = 0; i < numShapes; i++) {
+  shapes.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 50 + 10,
+    speed: Math.random() + 0.5,
+    color: '#6F4E9C',
+  });
+}
+
+// Draw shapes onto canvas
+function drawShapes() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  shapes.forEach((shape) => {
+    ctx.beginPath();
+    ctx.strokeStyle = shape.color;
+    ctx.lineWidth = 3;
+    ctx.rect(shape.x, shape.y, shape.size, shape.size);
+    ctx.stroke();
+  });
+}
+
+// Move shapes across canvas
+function moveShapes() {
+  shapes.forEach((shape) => {
+    shape.x += shape.speed;
+    if (shape.x > canvas.width + shape.size) {
+      shape.x = 0 - shape.size;
+      shape.y = Math.random() * canvas.height;
+    }
+  });
+}
+
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
+
+  drawShapes();
+  moveShapes();
+}
+
+animate();
 
   </script>
 </body>
