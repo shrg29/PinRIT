@@ -29,7 +29,7 @@
   height: 135px !important;
   border-radius: 50%;
   border-style: solid;
-  border-color: #5F5BF5;
+  border-color: #3C60FD;
   border-width: 3px;
   text-align:center;
 }
@@ -80,10 +80,9 @@
   justify-content: center;
 }
 
-
 .canvas-panel {
-    width: 65em;
-    height: 45em;
+    width: 55em;
+    height: 35em;
     border-width: 4px;  background: linear-gradient(#171B42, #171B42) padding-box,
     linear-gradient(to right, #20A2FF,#22DBF7, #A4FFCB) border-box;
     border-radius: 33px;
@@ -94,7 +93,7 @@
 .modal {
   width: 28em !important;
   height: 30em;
-  border-color: #5FA5FA;
+  border-color: #075985;
   background-color: #070916 !important;
   border-style: solid;
   border-radius: 5% !important;

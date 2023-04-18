@@ -1,6 +1,8 @@
 import myJson from '../../../../Marketplace.json' assert {type: 'json'};
 
-let contract = "0xdf898fbc4b3cBfc2CD08C4BB577D55Ec7DA24f1c"
+let contract = "0xc91Dcf983AfBDb9f2f5ecc50ad9A7608D83c4e6D"
+
+// let fetched = false
 
 //loading web3
 async function loadWeb3() {
@@ -15,70 +17,45 @@ async function loadContract() {
 }
 
 
-async function getAllNFTs() {
-
-    let listOfUrls = ""
-    //we are calling the contract method which returns the array of all nfts (info about owners, price and id)
-    let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
-        let newTransaction = array
-         console.log("info s ugovora " + array)
-
-        //go through everything from the array and based on the ID get the generated url
-        return Promise.all(newTransaction.map(async i => {
-            const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
-            //console.log(tokenURI)
-            return tokenURI
-        })).then(results => {
-            listOfUrls = results
-            // console.log("cijeli array " + results)
-            return results
-        })
-    })
-    return transaction
-
-}
-
 
 async function getInfo() {
-    let listOfUrls = ""
-    //we are calling the contract method which returns the array of all nfts (info about owner, price and id)
-    let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
-        let newTransaction = array
+  let listOfUrls = ""
+  //we are calling the contract method which returns the array of all nfts (info about owner, price and id)
+  let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
+      let newTransaction = array
 
-        //go through everything from the array and based on the ID get info 
-        return Promise.all(newTransaction.map(async i => {
-            const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
-            let meta = await axios.get(tokenURI, {
-                headers: {
-                    'Accept': 'text/plain'
-                }
-            });
-            meta = meta.data;
+      //go through everything from the array and based on the ID get info 
+      return Promise.all(newTransaction.map(async i => {
+          const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
+          let meta = await axios.get(tokenURI, {
+              headers: {
+                  'Accept': 'text/plain'
+              }
+          });
+          meta = meta.data;
 
-           // let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
-            let item = {
-                tokenId: i.tokenID,
-                price: i.price,
-                seller: i.seller,
-                owner: i.owner,
-                image: meta.image,
-                name: meta.name,
-                description: meta.description,
-            }
-            //console.log(item)
-            return item;
+         // let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+          let item = {
+              tokenId: i.tokenID,
+              price: i.price,
+              seller: i.seller,
+              owner: i.owner,
+              image: meta.image,
+              name: meta.name,
+              description: meta.description,
+          }
+          console.log(item)
+          return item;
 
-            return tokenURI
-        })).then(results => {
-            listOfUrls = results
-            // console.log(listOfUrls)
-            return results
-        })
-    })
-    return transaction
+          return tokenURI
+      })).then(results => {
+          listOfUrls = results
+          // console.log(listOfUrls)
+          return results
+      })
+  })
+  return transaction
 }
-
-
 
 
 // Set up canvas
@@ -99,7 +76,7 @@ for (let i = 0; i < numShapes; i++) {
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     size: Math.random() * 50 + 10,
-    speed: Math.random() + 0.5,
+    speed: Math.random() + 0.2,
     color: '#6F4E9C',
   });
 }
@@ -141,60 +118,60 @@ animate();
 
 
 function appendInfo(resp) {
+
     const card = document.querySelector(".card:last-child");
   
-    const nftName = document.createElement("p");
-    nftName.textContent = resp.name;
-    nftName.classList.add("info-text");
+    card.innerHTML =
+    `
+<div class="info-form">
+<div class="circle-el">
+<img class="circle" src= ${resp.image}/>
+</div>
+</div>
+<div class= "album-header info-text"> 
+<p>${resp.name}</p>
+<p>${resp.price} ETH</p>
+</div>
+`;
     
-    const price = document.createElement("p");
-    price.textContent = resp.price;
-    price.classList.add("info-text");
-    price.classList.add("price");
-
-    const eth = document.createElement("p");
-    eth.textContent = "ETH";
-    eth.classList.add("info-text");
-
-    card.appendChild(nftName);
-    card.appendChild(eth);
-    card.appendChild(price);
 }
 
 
 
-
-async function getMyNFTs() {
-    let transaction = await contract.methods.getMyNFTs().call()
-        console.log(transaction)
-
-
+async function getCurrentWalletAddress() {
+  const accounts = await window.web3.eth.getAccounts();
+  return accounts[0];
 }
+
+
     //loads at page rendering
     async function load() {
-        await loadWeb3();
-        window.contract = await loadContract();
-        //await getInfo();
-       // await getMyNFTs();
-
-            let listOfUrls = await getAllNFTs() // vraca sve urlove NFT-eva
+      await loadWeb3();
+      window.contract = await loadContract();
+      
+        let listOfUrls = await getInfo(); // vraca sve urlove NFT-eva
+        const currentWalletAddress = await getCurrentWalletAddress(); // get current wallet address
+    
+       // const responses = await Promise.all(listOfUrls.map(url => fetch(url).then(res => res.json())))
         
-            console.log(listOfUrls)
-            
-            const responses = await Promise.all(listOfUrls.map(url => fetch(url).then(res => res.json())))
-            
-            const root = document.getElementById("myNFTs");
-            for (const response of responses) {
-                const card = document.createElement("div");
-                card.classList.add("card");
-              
-                const img = document.createElement("img");
-                img.src = response.image;
-              
-                card.appendChild(img);
-                root.appendChild(card);
-                appendInfo(response)
-            }
+        const root = document.getElementById("myNFTs");
+        for (const response of listOfUrls) {
+          // console.log(" tu sam " + response);
+          // filter the response based on seller address
+          if (response.seller === currentWalletAddress) {
+
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+            const img = document.createElement("img");
+            img.src = response.image;
+    
+            card.appendChild(img);
+            root.appendChild(card);
+            appendInfo(response);
+          }
+        }
     }
+    
 
     load();

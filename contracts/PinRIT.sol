@@ -92,6 +92,20 @@ contract PinRIT is ERC721URIStorage {
         return tokens;
     }
 
+    // Function to get all NFTs owned or sold by a specific address
+    function myNFTs(address _address) public view returns (MintedNFT[] memory) {
+        uint nftCount = _tokenIDs.current();
+        MintedNFT[] memory myNFTsCount = new MintedNFT[](nftCount);
+
+        for (uint i = 0; i < nftCount; i++) {
+            if (IDToMintedNFT[i].seller == _address) {
+                myNFTsCount[nftCount] = IDToMintedNFT[i];
+                nftCount++;
+            }
+        }
+        return myNFTsCount;
+    }
+
 
     function buyNFT(uint256 tokenId) public payable {
        // uint price = IDToMintedNFT[tokenId].price;
@@ -106,6 +120,9 @@ contract PinRIT is ERC721URIStorage {
         payable(owner).transfer(listPrice);
         payable(seller).transfer(msg.value);
     }
+
+
+
 
 
         //get specific NFTs from current owner

@@ -1,7 +1,7 @@
 
 import myJson from '../../../../Marketplace.json' assert {type: 'json'};
 
-let contract = "0xE87d9B72e7c3d26dA6ca684F2c8747E0c4a18869"
+let contract = "0xc91Dcf983AfBDb9f2f5ecc50ad9A7608D83c4e6D"
 
 //loading web3
 async function loadWeb3() {

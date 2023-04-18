@@ -2,7 +2,7 @@ import myJson from '../../../../Marketplace.json' assert {type: 'json'};
 
 //let previous = "0xE87d9B72e7c3d26dA6ca684F2c8747E0c4a18869"
 // let contract = "0xBA7c5F06EaD3Ad1c3B3B85Cc98DFcdaf51Af49B3"
-let contract = "0xdf898fbc4b3cBfc2CD08C4BB577D55Ec7DA24f1c"
+let contract = "0xc91Dcf983AfBDb9f2f5ecc50ad9A7608D83c4e6D"
 
 let name = document.getElementById("name").value;
 let description = document.getElementById("description").value;
@@ -228,29 +228,6 @@ function updateFetched(isFetched) {
         fetched = isFetched
     }
 
-    //this actually gets all images of the NFTs
-    // async function getAllNFTs() {
-
-    //     let listOfUrls = ""
-    //     //we are calling the contract method which returns the array of all nfts (info about owners, price and id)
-    //     let transaction = await contract.methods.getAllNFTs().call().then(function (array) {
-    //         let newTransaction = array
-    //         // console.log("info s ugovora " + array)
-
-    //         //go through everything from the array and based on the ID get the generated url
-    //         return Promise.all(newTransaction.map(async i => {
-    //             const tokenURI = await window.contract.methods.tokenURI(i.tokenID).call()
-    //             //console.log(tokenURI)
-    //             return tokenURI
-    //         })).then(results => {
-    //             listOfUrls = results
-    //             // console.log("cijeli array " + results)
-    //             return results
-    //         })
-    //     })
-    //     return transaction
-
-    // }
 
     //vraca cijeli info i stavlja ga u array
     async function getInfo() {

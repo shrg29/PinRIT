@@ -58,7 +58,7 @@
 
     
 
-      <!-- <h3 class="address" id="connected-account-address"> You're currently connected with this address:  </h3> -->
+  
 
 
   <div id="header">
@@ -84,6 +84,7 @@
   <div id="canvas" class="row">
     <div class="col s12 offset-s2">
       <div class="card-panel">
+        <h3 class="address-canvas" id="connected-account-address"> Your address:  </h3>
          <div class="canvas-panel shadow-lg">
           <div data-target="modalNFT" class="modal-trigger" id="nftData"></div>
          </div>  
@@ -219,7 +220,7 @@ for (let i = 0; i < numShapes; i++) {
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     size: Math.random() * 50 + 10,
-    speed: Math.random() + 0.5,
+    speed: Math.random() + 0.2,
     color: '#6F4E9C',
   });
 }

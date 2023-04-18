@@ -3,8 +3,37 @@
     width: 90vw;
     margin-top: 10em !important;
     margin-bottom: 5em !important;
+    color: #93c5fd !important;
   }
 
   .help-canvas {
     height: fit-content !important;
   }
+
+  .collapsible-header {
+    background-color: #171B42 !important;
+    border-color: #6F4E9C !important;
+  }
+
+  .collapsible {
+    border-color: #6F4E9C !important;
+  }
+
+  .collapsible-body {
+    border-color: #6F4E9C !important;
+
+  }
+
+  .collapsible li {
+    animation: none !important;
+  }
+
+  .margin {
+    margin-top: 5em !important;
+    margin-bottom: 2em !important;
+    padding-left: 2em !important;
+  }
+  .size {
+    width: 400px !important;
+  }
+

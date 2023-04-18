@@ -14,6 +14,13 @@ body {
 }
 
 
+.address-canvas {
+  margin-bottom: 2em !important;
+  font-size: large !important;
+  color: #93c5fd;
+}
+
+
 canvas {
   position: fixed;
   top: 0;
@@ -56,22 +63,22 @@ footer {
 }
 
 .fa-instagram {
-  background: #9226FB;
+  background: #6F4E9C;
   color: white;
 }
 
 .fa-twitter {
-  background: #9226FB;
+  background: #6F4E9C;
   color: white;
 }
 
 .fa-youtube {
-  background:#9226FB;
+  background:#6F4E9C;
   color: white;
 }
 
 .fa-snapchat-ghost {
-  background: #9226FB;
+  background: #6F4E9C;
   color: white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
@@ -82,7 +89,7 @@ footer {
   border-style: solid !important;
   border-radius: 1em !important;
   background-color: #111535 !important;
-  border-color: #7c4dff !important;
+  border-color: #495099 !important;
   color: white !important;
   border-width: 2.5px !important;
 }
