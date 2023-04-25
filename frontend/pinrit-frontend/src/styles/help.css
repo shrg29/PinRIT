@@ -28,12 +28,24 @@
     animation: none !important;
   }
 
-  .margin {
-    margin-top: 5em !important;
-    margin-bottom: 2em !important;
-    padding-left: 2em !important;
-  }
   .size {
     width: 400px !important;
+    margin-left: 5em !important;
+  }
+
+  .mt {
+    margin-top: 5em;
+  }
+
+  .ml {
+    margin-left: 3em !important;
+  }
+
+  .text-margin {
+    margin-bottom: 1em;
+  }
+
+  .card-panel p {
+    margin-top: 0.5em;
   }
 

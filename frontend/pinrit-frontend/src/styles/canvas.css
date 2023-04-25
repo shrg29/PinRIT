@@ -174,5 +174,14 @@ textarea {
   transition-duration: 0.5s;
   }
 
+  #address {
+    position:absolute; 
+    left: 75%; 
+    top: 5%;
+    display: flex;
+  }
+  
+  
+
 
 

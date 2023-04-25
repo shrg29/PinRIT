@@ -99,7 +99,6 @@ function uploadFileToIPFS(file) {
 
 
 async function OnChangeFile(e) {
-    console.log("slay")
     var file = e.target.files[0];
     //check for file extension
     try {
@@ -107,7 +106,7 @@ async function OnChangeFile(e) {
         const response = await uploadFileToIPFS(file);
         if (response.success === true) {
             console.log("Uploaded image to Pinata: ", response.pinataURL)
-            fileURL = response.pinataURL
+            fileURL = response.pinataURL;
         }
     }
     catch (e) {
@@ -129,7 +128,7 @@ async function uploadMetadataToIPFS() {
 
     //print error msg
     if (name.length == 0) {
-        errorName.innerHTML += "- NFT Name is required.<br/>";
+        errorName.innerHTML += "- NFT name is required.<br/>";
     }else if (String(name).trim().length <= 2) {
         errorName.innerHTML += "- NFT name has to have at least three characters.<br/>";
     }
@@ -177,14 +176,15 @@ function updateFormParams(newName, newDescription, newPrice) {
     price = newPrice
 }
 
-
 //UPLOAD ARTWORK
 const addButton = document.getElementById("buttonUpload");
 addButton.addEventListener("click", uploadArtwork);
 
 async function uploadArtwork(e) {
     e.preventDefault();
-
+    // Show message to user
+    const messageDiv = document.getElementById("msg-text");
+    messageDiv.innerHTML = "Uploading artwork... Please wait.";
     try {
         const metadataURL = await uploadMetadataToIPFS();
         let newPrice = document.getElementById("price").value;
@@ -194,9 +194,10 @@ async function uploadArtwork(e) {
 
         let transaction = await window.contract.methods.mint(metadataURL, newPrice).send({ from: account, gas: 3000000, value: web3.utils.toWei(String(0.001), 'ether') }, function (err, res) { })
         await transaction.wait()
+        
     }
     catch (e) {
-        alert("Succesfully uploaded artwork!")
+        messageDiv.innerHTML = "Upload successful!";
         window.location.reload();
     }
 }
@@ -204,6 +205,9 @@ const buyButton = document.getElementById('buyButton')
 buyButton.addEventListener('click', buyArtwork)
 
 async function buyArtwork(resp) {
+
+    const messageDiv = document.getElementById("msg-text");
+    messageDiv.innerHTML = "Transaction ongoing... Please wait.";
 
     try {
         let info = await getInfo()
@@ -221,6 +225,8 @@ async function buyArtwork(resp) {
             await transaction.wait()
         } catch (error) {
             console.log("Buy error ", error)
+            messageDiv.innerHTML = "You successfully purchased NFT!";
+            window.location.reload();
         }
     }
 
@@ -246,10 +252,10 @@ function updateFetched(isFetched) {
                 });
                 meta = meta.data;
 
-                let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+                //let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
                 let item = {
                     tokenId: i.tokenID,
-                    price,
+                    price: i.price,
                     seller: i.seller,
                     owner: i.owner,
                     image: meta.image,
